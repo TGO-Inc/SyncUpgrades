@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+      <Reference Include="BepInEx">
+          <HintPath>Libs/BepInEx.dll</HintPath>
+      </Reference>
+      <Reference Include="UnityEngine">
+          <HintPath>Libs/UnityEngine.dll</HintPath>
+      </Reference>
+      <Reference Include="0Harmony">
+          <HintPath>Libs/0Harmony.dll</HintPath>
+      </Reference>
+      <Reference Include="UnityEngine.CoreModule">
+          <HintPath>Libs/UnityEngine.CoreModule.dll</HintPath>
+      </Reference>
+      <Reference Include="UnityEngine.InputLegacyModule">
+          <HintPath>Libs/UnityEngine.InputLegacyModule.dll</HintPath>
+      </Reference>
+      <Reference Include="PhotonUnityNetworking">
+          <HintPath>Libs/PhotonUnityNetworking.dll</HintPath>
+      </Reference>
+      <Reference Include="PhotonRealtime">
+          <HintPath>Libs/PhotonRealtime.dll</HintPath>
+      </Reference>
+      <Reference Include="Assembly">
+          <HintPath>Libs/Assembly.dll</HintPath>
+      </Reference>
+      <Reference Include="UnityEngine.PhysicsModule">
+          <HintPath>Libs/UnityEngine.PhysicsModule.dll</HintPath>
+      </Reference>
+  </ItemGroup>
+</Project>
