@@ -1,0 +1,9 @@
+{
+    "name": "SyncHostUpgrades",
+    "version_number": "1.0.0",
+    "website_url": "https://github.com/Shark-Lucas/REPO_Sync_Host_Upgrades",
+    "description": "Later-joining players can also synchronize host upgrades. 后加入玩家也可以同步主机升级.",
+    "dependencies": [
+        "BepInEx-BepInExPack-5.4.2100"
+    ]
+}
