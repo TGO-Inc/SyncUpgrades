@@ -1,1 +1,0 @@
-dotnet new classlib --framework netstandard2.1
