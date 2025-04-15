@@ -58,3 +58,5 @@ will update the underlying properties of the player, in this case `PhysGrabber.t
 ### HELP, when a non-host player consumes an upgrade, it doesn't sync to the host or anyone else!
 - This is a problem with the mod not sending the upgrade event to the server.
 - Developers please examine [Patches/PunManagerPatch.cs](Patches/PunManagerPatch.cs#L103-L148)
+
+  https://github.com/TheGuy920/REPO_Sync_Host_Upgrades/blob/b11ff38ce8579df0b74903172069f63d1b0180a7/Patches/PunManagerPatch.cs#L103-L148
