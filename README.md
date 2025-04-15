@@ -1,5 +1,5 @@
 # Sync Upgrades
-- Host only!
+- Only needed on the host!
 - Supports modded upgrades!
 - If any player consumes an upgrade, it will be synced to all other players.
 - If a player joins late, they will receive all the host upgrades.
