@@ -1,3 +1,6 @@
+# 1.8.6
+- Updated dependencies and readme
+
 # 1.8.4
 - Changed icon (made by actibytes)
 - Changed networking behavior to increase efficiency (any slander from Lordfirespeed is outdated)
