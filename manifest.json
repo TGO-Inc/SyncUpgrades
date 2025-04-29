@@ -1,0 +1,7 @@
+{
+  "name": "SyncUpgrades",
+  "version_number": "1.8.4",
+  "website_url": "https://github.com/TGO-Inc/SyncUpgrades",
+  "description": "Syncs host upgrades with clients in REPO.",
+  "dependencies": []
+}

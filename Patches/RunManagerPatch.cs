@@ -15,7 +15,7 @@ internal class RunManagerPatch
             return;
         
         // Sync the upgrades
-        var defaultBundle = new PunBundle(PunManager.instance, PunManager.instance.GetView(), StatsManager.instance, SemiUtil.HostSteamId);
+        var defaultBundle = new PunBundle(PunManager.instance, PunManager.instance.GetView(), StatsManager.instance, SyncUtil.HostSteamId);
         SyncManager.SyncAll(defaultBundle);
     }
 }

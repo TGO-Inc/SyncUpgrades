@@ -1,6 +1,6 @@
-﻿using BepInEx;
-using BepInEx.Configuration;
+﻿using BepInEx.Configuration;
 using BepInEx.Logging;
+using BepInEx;
 using HarmonyLib;
 using SyncUpgrades.Core;
 using UnityEngine;
@@ -8,10 +8,11 @@ using UnityEngine;
 namespace SyncUpgrades;
 
 [BepInPlugin(PluginId, PluginName, PluginVersion)]
+[BepInDependency("REPOLib", "2.1.0")]
 public class Entry : BaseUnityPlugin
 {
     private const string PluginName = "Sync Upgrades";
-    private const string PluginVersion = "1.5.6";
+    private const string PluginVersion = "1.8.4";
     private const string PluginId = "TGO.SyncUpgrades";
 
     private static readonly Harmony Harmony = new(PluginId);

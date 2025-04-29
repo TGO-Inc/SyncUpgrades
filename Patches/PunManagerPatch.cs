@@ -1,8 +1,8 @@
-using System.Linq;
 using HarmonyLib;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 using Photon.Pun;
 using SyncUpgrades.Core;
-using Hashtable = ExitGames.Client.Photon.Hashtable;
+using System.Linq;
 
 namespace SyncUpgrades.Patches;
 
@@ -19,7 +19,7 @@ public class PunManagerPatch
             return;
         
         var bundle = new PunBundle(__instance, ___photonView, ___statsManager, playerName);
-        SyncManager.PlayerUpgradeStat(bundle, SemiUtil.HealthId);
+        SyncManager.PlayerUpgradeStat(bundle, SyncUtil.HealthId);
     }
     
     // UpgradePlayerEnergy
@@ -32,7 +32,7 @@ public class PunManagerPatch
             return;
         
         var bundle = new PunBundle(__instance, ___photonView, ___statsManager, _steamID);
-        SyncManager.PlayerUpgradeStat(bundle, SemiUtil.StaminaId);
+        SyncManager.PlayerUpgradeStat(bundle, SyncUtil.StaminaId);
     }
     
     // UpgradePlayerTumbleLaunch
@@ -45,7 +45,7 @@ public class PunManagerPatch
             return;
         
         var bundle = new PunBundle(__instance, ___photonView, ___statsManager, _steamID);
-        SyncManager.PlayerUpgradeStat(bundle, SemiUtil.TumbleLaunchId);
+        SyncManager.PlayerUpgradeStat(bundle, SyncUtil.TumbleLaunchId);
     }
     
     // UpgradePlayerSprintSpeed
@@ -58,7 +58,7 @@ public class PunManagerPatch
             return;
         
         var bundle = new PunBundle(__instance, ___photonView, ___statsManager, _steamID);
-        SyncManager.PlayerUpgradeStat(bundle, SemiUtil.SprintSpeedId);
+        SyncManager.PlayerUpgradeStat(bundle, SyncUtil.SprintSpeedId);
     }
     
     // UpgradePlayerGrabStrength
@@ -71,7 +71,7 @@ public class PunManagerPatch
             return;
         
         var bundle = new PunBundle(__instance, ___photonView, ___statsManager, _steamID);
-        SyncManager.PlayerUpgradeStat(bundle, SemiUtil.GrabStrengthId);
+        SyncManager.PlayerUpgradeStat(bundle, SyncUtil.GrabStrengthId);
     }
     
     // UpgradePlayerThrowStrength
@@ -84,7 +84,7 @@ public class PunManagerPatch
             return;
         
         var bundle = new PunBundle(__instance, ___photonView, ___statsManager, _steamID);
-        SyncManager.PlayerUpgradeStat(bundle, SemiUtil.GrabThrowId);
+        SyncManager.PlayerUpgradeStat(bundle, SyncUtil.GrabThrowId);
     }
 
     // UpgradePlayerGrabRange
@@ -97,7 +97,33 @@ public class PunManagerPatch
             return;
         
         var bundle = new PunBundle(__instance, ___photonView, ___statsManager, _steamID);
-        SyncManager.PlayerUpgradeStat(bundle, SemiUtil.GrabRangeId);
+        SyncManager.PlayerUpgradeStat(bundle, SyncUtil.GrabRangeId);
+    }
+    
+    // UpgradePlayerExtraJump
+    [HarmonyPrefix]
+    [HarmonyPatch("UpdateExtraJumpRightAway", typeof(string))]
+    private static void UpdateExtraJumpRightAway(PunManager __instance, PhotonView ___photonView, StatsManager ___statsManager, string _steamID)
+    {
+        // If not host OR single-player, return
+        if (SemiFunc.IsNotMasterClient())
+            return;
+        
+        var bundle = new PunBundle(__instance, ___photonView, ___statsManager, _steamID);
+        SyncManager.PlayerUpgradeStat(bundle, SyncUtil.ExtraJumpId);
+    }
+    
+    // UpgradeMapPlayerCount
+    [HarmonyPrefix]
+    [HarmonyPatch("UpdateMapPlayerCountRightAway", typeof(string))]
+    private static void UpdateMapPlayerCountRightAway(PunManager __instance, PhotonView ___photonView, StatsManager ___statsManager, string _steamID)
+    {
+        // If not host OR single-player, return
+        if (SemiFunc.IsNotMasterClient())
+            return;
+        
+        var bundle = new PunBundle(__instance, ___photonView, ___statsManager, _steamID);
+        SyncManager.PlayerUpgradeStat(bundle, SyncUtil.MapPlayerCountId);
     }
     
     /// <summary>

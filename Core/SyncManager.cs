@@ -1,7 +1,7 @@
-using System.Collections.Generic;
-using System.Linq;
 using BepInEx.Configuration;
 using JetBrains.Annotations;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace SyncUpgrades.Core;
 
@@ -35,26 +35,27 @@ public static class SyncManager
     }
     
     public static void SyncUpgrades(string steamID) => SyncUpgrades(
-        new PunBundle(PunManager.instance, PunManager.instance.GetView(), StatsManager.instance, steamID), 
-        SemiFunc.PlayerAvatarGetFromSteamID(steamID));
+        new PunBundle(PunManager.instance, StatsManager.instance, steamID), 
+        SemiFunc.PlayerAvatarGetFromSteamID(steamID),
+        true);
     
     private static IEnumerable<UpgradeId> UpgradeTypes(PunBundle bundle) => bundle.Stats.dictionaryOfDictionaries
         .Where(kvp => kvp.Key.StartsWith("playerUpgrade") || kvp.Key.StartsWith("appliedPlayerUpgrade"))
         .Select(kvp => new UpgradeId(kvp.Key));
     
-    private static void SyncUpgrades(PunBundle bundle, PlayerAvatar workingPlayer)
+    private static void SyncUpgrades(PunBundle bundle, PlayerAvatar workingPlayer, bool dict = false)
     {
-        var hostSteamId = SemiUtil.HostSteamId;
+        var hostSteamId = SyncUtil.HostSteamId;
         var steamId = workingPlayer.SteamId();
         
-        if (steamId == SemiUtil.HostSteamId)
+        if (steamId == SyncUtil.HostSteamId)
             return;
         
         // Retrieve the local player upgrades
         foreach (var upgradeId in UpgradeTypes(bundle).Where(ShouldSync))
         {
             // load the upgrade dictionary
-            var upgradeDictionary = SemiUtil.GetUpgrades(bundle.Stats, upgradeId);
+            var upgradeDictionary = SyncUtil.GetUpgrades(bundle.Stats, upgradeId);
             
             // get player level
             var oldPlayerValue = upgradeDictionary.GetValueOrDefault(steamId, 0);
@@ -69,13 +70,15 @@ public static class SyncManager
             // Call the corresponding upgrade method based on the upgrade type
             if (upgradeId.Type != UpgradeType.Modded)
                 for (var i = 0; i < diff; i++)
-                    SemiUtil.CallRPC(bundle, steamId, upgradeId);
+                    SyncUtil.CallRPCOnePlayer(bundle, workingPlayer, upgradeId);
             else
-                SemiUtil.IncrementUpdateDictAndSync(bundle, steamId, upgradeId, diff);
+                SyncUtil.UpgradeModded(bundle, workingPlayer, upgradeId, diff);
 
             // Log the synchronization
             Entry.LogSource.LogInfo($"Synchronized upgrade for player {steamId}: {upgradeId.RawName} ({upgradeId.Type}), from {oldPlayerValue} to {hostLevel}");
         }
+        
+        if (dict) SyncUtil.SyncStatsDictionaryToAll(bundle);
     }
     
     public static void PlayerUpgradeStat(PunBundle bundle, UpgradeId upgradeId)
@@ -85,9 +88,9 @@ public static class SyncManager
             return;
         
         // Upgrade host if not host and return
-        if (bundle.SteamId != SemiUtil.HostSteamId) 
+        if (bundle.SteamId != SyncUtil.HostSteamId) 
         {
-            SemiUtil.CallUpdateFunction(bundle.Manager, SemiUtil.HostSteamId, upgradeId.Type);
+            SyncUtil.CallUpdateFunction(bundle.Manager, SyncUtil.HostSteamId, upgradeId.Type);
             return;
         }
 
@@ -98,8 +101,10 @@ public static class SyncManager
     public static void SyncAll(PunBundle bundle)
     {
         // Skip sync with host, then sync the upgrades for all players
-        foreach (var updatePlayer in SemiFunc.PlayerGetAll().Where(avatar => avatar.SteamId() != SemiUtil.HostSteamId))
+        foreach (var updatePlayer in SemiFunc.PlayerGetAll().Where(avatar => avatar.SteamId() != SyncUtil.HostSteamId))
             SyncUpgrades(bundle, updatePlayer);
+        
+        SyncUtil.SyncStatsDictionaryToAll(bundle);
     }
     
     private static bool ShouldSync(UpgradeId key) => key.Type switch

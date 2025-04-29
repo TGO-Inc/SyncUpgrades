@@ -1,27 +1,23 @@
-using System;
-using System.Collections.Generic;
-using HarmonyLib;
 using JetBrains.Annotations;
 using Photon.Pun;
+using Photon.Realtime;
+using REPOLib.Modules;
+using System.Collections.Generic;
+using System;
 
 namespace SyncUpgrades.Core;
 
 [PublicAPI]
-public static class SemiUtil
+public static class SyncUtil
 {
-    public static readonly AccessTools.FieldRef<PlayerAvatar, string> GetSteamID 
-        = AccessTools.FieldRefAccess<PlayerAvatar, string>("steamID");
-    
     private const RpcTarget Others = RpcTarget.Others;
-    public static string HostSteamId => GetSteamID(Local);
+    public static string HostSteamId => Local.SteamId();
     public static PlayerAvatar Local => SemiFunc.PlayerAvatarLocal();
 
     public static string TrimKey(string? key)
     {
-        if (string.IsNullOrEmpty(key))
-            return string.Empty;
-        if (key.StartsWith("appliedPlayerUpgrade"))
-            return key[20..];
+        if (string.IsNullOrEmpty(key)) return string.Empty;
+        if (key.StartsWith("appliedPlayerUpgrade")) return key[20..];
         return key.StartsWith("playerUpgrade") ? key[13..] : key;
     }
     
@@ -83,6 +79,11 @@ public static class SemiUtil
         _ or UpgradeType.Modded => throw new ArgumentException()
     };
 
+    public static void CallRPCOnePlayer(PunBundle bundle, PlayerAvatar workingPlayer, UpgradeId key)
+        => CallRPCOnePlayer(bundle, workingPlayer.SteamId(), key, workingPlayer.photonView.Owner);
+    public static void CallRPCOnePlayer(PunBundle bundle, string steamId, UpgradeId key, Player player)
+        => bundle.View.RPC(GetRPCFunctionName(key.Type), player, steamId, ++GetUpgrades(bundle.Stats, key)[steamId]);
+    public static void SyncStatsDictionaryToAll(PunBundle bundle) => bundle.Manager.SyncAllDictionaries();
     public static void CallRPC(PunBundle bundle, string steamId, UpgradeId key)
         => bundle.View.RPC(GetRPCFunctionName(key.Type), Others, steamId, ++GetUpgrades(bundle.Stats, key)[steamId]);
     
@@ -99,12 +100,25 @@ public static class SemiUtil
         UpgradeType.GrabThrow => instance.UpgradePlayerThrowStrength(steamId),
         _ or UpgradeType.Modded => throw new ArgumentException()
     };
+    
+    public static void UpgradeModded(PunBundle bundle, PlayerAvatar workingPlayer, UpgradeId key, int amount)
+    {
+        var steamId = workingPlayer.SteamId();
+        var newAmt = bundle.Stats.dictionaryOfDictionaries[key.RawName][steamId] += amount;
+        if (Upgrades.TryGetUpgrade(TrimKey(key.RawName), out var upgrade))
+            upgrade.SetLevel(workingPlayer, newAmt);
+        else
+            IncrementUpdateDict(bundle, steamId, key, amount);
+    }
 
     public static void IncrementUpdateDictAndSync(PunBundle bundle, string steamId, UpgradeId key, int amount)
     {
         bundle.Stats.dictionaryOfDictionaries[key.RawName][steamId] += amount;
         bundle.Manager.SyncAllDictionaries();
     }
+    
+    public static void IncrementUpdateDict(PunBundle bundle, string steamId, UpgradeId key, int amount)
+        => bundle.Stats.dictionaryOfDictionaries[key.RawName][steamId] += amount;
     
     public static readonly UpgradeId HealthId = new(UpgradeType.Health);
     public static readonly UpgradeId StaminaId = new(UpgradeType.Stamina);
