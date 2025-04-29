@@ -7,9 +7,9 @@
         <IncludeCopyLocalFilesOutputGroup>false</IncludeCopyLocalFilesOutputGroup>
         <Configurations>Debug;Release;JoinDebug</Configurations>
         <Platforms>AnyCPU</Platforms>
-        <Version>1.8.4</Version>
-        <AssemblyVersion>1.8.4</AssemblyVersion>
-        <FileVersion>1.8.4</FileVersion>
+        <Version>1.8.6</Version>
+        <AssemblyVersion>1.8.6</AssemblyVersion>
+        <FileVersion>1.8.6</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>

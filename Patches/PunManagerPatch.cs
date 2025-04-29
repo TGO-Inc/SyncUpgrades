@@ -1,8 +1,6 @@
 using HarmonyLib;
-using Hashtable = ExitGames.Client.Photon.Hashtable;
 using Photon.Pun;
 using SyncUpgrades.Core;
-using System.Linq;
 
 namespace SyncUpgrades.Patches;
 
@@ -124,52 +122,5 @@ public class PunManagerPatch
         
         var bundle = new PunBundle(__instance, ___photonView, ___statsManager, _steamID);
         SyncManager.PlayerUpgradeStat(bundle, SyncUtil.MapPlayerCountId);
-    }
-    
-    /// <summary>
-    /// Please CALL THIS FUNCTION with photonView.RPC to notify the host of the upgrade!!
-    /// <para>{"upgradeName" = { "steamId": 1 } }, true</para>
-    /// </summary>
-    /// <param name="__instance"></param>
-    /// <param name="___photonView"></param>
-    /// <param name="___statsManager"></param>
-    /// <param name="data"></param>
-    /// <param name="finalChunk">SET TO TRUE IF CALLING FROM MODDED RPC</param>
-    /// <returns></returns>
-    [HarmonyPrefix]
-    [HarmonyPatch("ReceiveSyncData", typeof(Hashtable), typeof(bool))]
-    private static bool ReceiveSyncData(PunManager __instance, PhotonView ___photonView, StatsManager ___statsManager, Hashtable data, bool finalChunk)
-    {
-        // If not host OR single-player, return
-        if (SemiFunc.IsNotMasterClient() || !finalChunk)
-            return true;
-
-        if (data.Count > 1)
-            return true;
-
-        var dataItem = data.First();
-        if (dataItem.Key is not string upgradeName || dataItem.Value is not Hashtable hashtable)
-            return true;
-        
-        var upgradeId = new UpgradeId(upgradeName);
-        if (upgradeId.Type != UpgradeType.Modded)
-            return true;
-        
-        if (hashtable.Count > 1)
-            return true;
-        
-        var dataItem2 = hashtable.First();
-        if (dataItem2.Key is not string steamId || dataItem2.Value is not int newValue)
-            return true;
-
-        var original = ___statsManager.dictionaryOfDictionaries[upgradeName][steamId];
-        if (original >= newValue)
-            return true;
-        
-        var bundle = new PunBundle(__instance, ___photonView, ___statsManager, steamId);
-        for(var i = original; i <= newValue; i++)
-            SyncManager.PlayerUpgradeStat(bundle, upgradeId);
-        
-        return false;
     }
 }
