@@ -15,6 +15,7 @@ internal class StatsManagerPatch
             return;
         
         // Sync the upgrades
+        // Entry.LogSource.LogInfo("[PlayerAdd] Syncing upgrades for player: " + _steamID);
         SyncManager.SyncUpgrades(_steamID);
     }
 }

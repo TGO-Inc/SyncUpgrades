@@ -16,7 +16,7 @@ public class PunManagerPatch
         if (SemiFunc.IsNotMasterClient())
             return;
         
-        var bundle = new PunBundle(__instance, ___photonView, ___statsManager, playerName);
+        PunBundle bundle = new(__instance, ___photonView, ___statsManager, playerName);
         SyncManager.PlayerUpgradeStat(bundle, SyncUtil.HealthId);
     }
     
@@ -29,7 +29,7 @@ public class PunManagerPatch
         if (SemiFunc.IsNotMasterClient())
             return;
         
-        var bundle = new PunBundle(__instance, ___photonView, ___statsManager, _steamID);
+        PunBundle bundle = new(__instance, ___photonView, ___statsManager, _steamID);
         SyncManager.PlayerUpgradeStat(bundle, SyncUtil.StaminaId);
     }
     
@@ -42,7 +42,7 @@ public class PunManagerPatch
         if (SemiFunc.IsNotMasterClient())
             return;
         
-        var bundle = new PunBundle(__instance, ___photonView, ___statsManager, _steamID);
+        PunBundle bundle = new(__instance, ___photonView, ___statsManager, _steamID);
         SyncManager.PlayerUpgradeStat(bundle, SyncUtil.TumbleLaunchId);
     }
     
@@ -55,7 +55,7 @@ public class PunManagerPatch
         if (SemiFunc.IsNotMasterClient())
             return;
         
-        var bundle = new PunBundle(__instance, ___photonView, ___statsManager, _steamID);
+        PunBundle bundle = new(__instance, ___photonView, ___statsManager, _steamID);
         SyncManager.PlayerUpgradeStat(bundle, SyncUtil.SprintSpeedId);
     }
     
@@ -68,7 +68,7 @@ public class PunManagerPatch
         if (SemiFunc.IsNotMasterClient())
             return;
         
-        var bundle = new PunBundle(__instance, ___photonView, ___statsManager, _steamID);
+        PunBundle bundle = new(__instance, ___photonView, ___statsManager, _steamID);
         SyncManager.PlayerUpgradeStat(bundle, SyncUtil.GrabStrengthId);
     }
     
@@ -81,7 +81,7 @@ public class PunManagerPatch
         if (SemiFunc.IsNotMasterClient())
             return;
         
-        var bundle = new PunBundle(__instance, ___photonView, ___statsManager, _steamID);
+        PunBundle bundle = new(__instance, ___photonView, ___statsManager, _steamID);
         SyncManager.PlayerUpgradeStat(bundle, SyncUtil.GrabThrowId);
     }
 
@@ -94,7 +94,7 @@ public class PunManagerPatch
         if (SemiFunc.IsNotMasterClient())
             return;
         
-        var bundle = new PunBundle(__instance, ___photonView, ___statsManager, _steamID);
+        PunBundle bundle = new(__instance, ___photonView, ___statsManager, _steamID);
         SyncManager.PlayerUpgradeStat(bundle, SyncUtil.GrabRangeId);
     }
     
@@ -107,7 +107,7 @@ public class PunManagerPatch
         if (SemiFunc.IsNotMasterClient())
             return;
         
-        var bundle = new PunBundle(__instance, ___photonView, ___statsManager, _steamID);
+        PunBundle bundle = new(__instance, ___photonView, ___statsManager, _steamID);
         SyncManager.PlayerUpgradeStat(bundle, SyncUtil.ExtraJumpId);
     }
     
@@ -120,7 +120,7 @@ public class PunManagerPatch
         if (SemiFunc.IsNotMasterClient())
             return;
         
-        var bundle = new PunBundle(__instance, ___photonView, ___statsManager, _steamID);
+        PunBundle bundle = new(__instance, ___photonView, ___statsManager, _steamID);
         SyncManager.PlayerUpgradeStat(bundle, SyncUtil.MapPlayerCountId);
     }
 }

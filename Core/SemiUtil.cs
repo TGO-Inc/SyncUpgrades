@@ -1,7 +1,6 @@
 using JetBrains.Annotations;
 using Photon.Pun;
 using Photon.Realtime;
-using REPOLib.Modules;
 using System.Collections.Generic;
 using System;
 
@@ -103,9 +102,10 @@ public static class SyncUtil
     
     public static void UpgradeModded(PunBundle bundle, PlayerAvatar workingPlayer, UpgradeId key, int amount)
     {
-        var steamId = workingPlayer.SteamId();
-        var newAmt = bundle.Stats.dictionaryOfDictionaries[key.RawName][steamId] += amount;
-        if (Upgrades.TryGetUpgrade(TrimKey(key.RawName), out var upgrade))
+        string steamId = workingPlayer.SteamId();
+        int newAmt = bundle.Stats.dictionaryOfDictionaries[key.RawName][steamId] += amount;
+        
+        if (REPOLib.Modules.Upgrades.TryGetUpgrade(TrimKey(key.RawName), out REPOLib.Modules.PlayerUpgrade? upgrade))
             upgrade.SetLevel(workingPlayer, newAmt);
         else
             IncrementUpdateDict(bundle, steamId, key, amount);

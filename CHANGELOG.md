@@ -1,3 +1,6 @@
+# 1.9.2
+- Fixed accidental DOS on clients. Some reason the game calls "ChangeLevel" 17 trillion times when the game restarts after the arena
+
 # 1.8.6
 - Updated dependencies and readme
 

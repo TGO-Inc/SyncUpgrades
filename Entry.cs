@@ -12,7 +12,7 @@ namespace SyncUpgrades;
 public class Entry : BaseUnityPlugin
 {
     private const string PluginName = "Sync Upgrades";
-    private const string PluginVersion = "1.8.6";
+    private const string PluginVersion = "1.9.2";
     private const string PluginId = "TGO.SyncUpgrades";
 
     private static readonly Harmony Harmony = new(PluginId);
@@ -32,7 +32,7 @@ public class Entry : BaseUnityPlugin
         Harmony.PatchAll();
         
         // Persist the game object
-        gameObject.hideFlags = HideFlags.DontSaveInEditor;
+        this.gameObject.hideFlags = HideFlags.DontSaveInEditor;
         
         // Log startup
         LogSource.LogInfo("Sync Upgrades loaded!");

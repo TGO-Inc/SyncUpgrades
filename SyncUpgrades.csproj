@@ -5,11 +5,9 @@
         <Nullable>enable</Nullable>
         <LangVersion>default</LangVersion>
         <IncludeCopyLocalFilesOutputGroup>false</IncludeCopyLocalFilesOutputGroup>
-        <Configurations>Debug;Release;JoinDebug</Configurations>
+        <Configurations>Debug;Release;JoinDebug;Sync Debug</Configurations>
         <Platforms>AnyCPU</Platforms>
-        <Version>1.8.6</Version>
-        <AssemblyVersion>1.8.6</AssemblyVersion>
-        <FileVersion>1.8.6</FileVersion>
+        <Version>1.9.2</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -94,6 +92,9 @@
       <Reference Include="PhotonVoice.PUN">
         <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\PhotonVoice.PUN.dll</HintPath>
       <Private>false</Private></Reference>
+      <Reference Include="REPOLib">
+        <HintPath>..\..\..\.config\r2modmanPlus-local\REPO\profiles\Default\BepInEx\plugins\Zehs-REPOLib\REPOLib.dll</HintPath>
+      </Reference>
       <Reference Include="Sirenix.OdinInspector.Attributes">
         <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\Sirenix.OdinInspector.Attributes.dll</HintPath>
       <Private>false</Private></Reference>
@@ -397,9 +398,5 @@
       <Reference Include="websocket-sharp">
         <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\websocket-sharp.dll</HintPath>
       <Private>false</Private></Reference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\REPOLib\REPOLib\REPOLib.csproj" />
   </ItemGroup>
 </Project>
