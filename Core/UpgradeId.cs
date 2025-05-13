@@ -8,4 +8,5 @@ public class UpgradeId(string rawName)
 
     public UpgradeType Type { get; } = SyncUtil.GetUpgradeType(rawName);
     public string RawName { get; } = rawName;
+    public override string ToString() => $"{{ {nameof(this.Type)} = \"{this.Type.ToName()}\", {nameof(this.RawName)} = \"{this.RawName}\" }}";
 }

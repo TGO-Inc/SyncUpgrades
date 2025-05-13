@@ -9,4 +9,5 @@ public class PunBundle(PunManager mgr, PhotonView pv, StatsManager sts, string s
     public PhotonView View { get; } = pv;
     public StatsManager Stats { get; } = sts;
     public string SteamId { get; } = sId;
+    public override string ToString() => this.SteamId;
 }

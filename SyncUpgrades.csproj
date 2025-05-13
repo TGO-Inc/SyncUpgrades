@@ -5,9 +5,9 @@
         <Nullable>enable</Nullable>
         <LangVersion>default</LangVersion>
         <IncludeCopyLocalFilesOutputGroup>false</IncludeCopyLocalFilesOutputGroup>
-        <Configurations>Debug;Release;JoinDebug;Sync Debug</Configurations>
+        <Configurations>Debug;Release;</Configurations>
         <Platforms>AnyCPU</Platforms>
-        <Version>1.9.2</Version>
+        <Version>1.9.4</Version>
   </PropertyGroup>
 
   <ItemGroup>

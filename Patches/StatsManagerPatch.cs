@@ -14,8 +14,11 @@ internal class StatsManagerPatch
         if (SemiFunc.IsNotMasterClient())
             return;
         
+        #if DEBUG
+        Entry.LogSource.LogInfo("[PlayerAdd] Syncing upgrades for player: " + _steamID);
+        #endif
+        
         // Sync the upgrades
-        // Entry.LogSource.LogInfo("[PlayerAdd] Syncing upgrades for player: " + _steamID);
         SyncManager.SyncUpgrades(_steamID);
     }
 }

@@ -16,6 +16,10 @@ public class PunManagerPatch
         if (SemiFunc.IsNotMasterClient())
             return;
         
+        #if DEBUG
+        Entry.LogSource.LogInfo($"[{nameof(UpdateHealthRightAway)}] Upgrade: " + playerName);
+        #endif
+        
         PunBundle bundle = new(__instance, ___photonView, ___statsManager, playerName);
         SyncManager.PlayerUpgradeStat(bundle, SyncUtil.HealthId);
     }
@@ -28,6 +32,10 @@ public class PunManagerPatch
         // If not host OR single-player, return
         if (SemiFunc.IsNotMasterClient())
             return;
+        
+        #if DEBUG
+        Entry.LogSource.LogInfo($"[{nameof(UpdateEnergyRightAway)}] Upgrade: " + _steamID);
+        #endif
         
         PunBundle bundle = new(__instance, ___photonView, ___statsManager, _steamID);
         SyncManager.PlayerUpgradeStat(bundle, SyncUtil.StaminaId);
@@ -42,6 +50,10 @@ public class PunManagerPatch
         if (SemiFunc.IsNotMasterClient())
             return;
         
+        #if DEBUG
+        Entry.LogSource.LogInfo($"[{nameof(UpdateTumbleLaunchRightAway)}] Upgrade: " + _steamID);
+        #endif
+        
         PunBundle bundle = new(__instance, ___photonView, ___statsManager, _steamID);
         SyncManager.PlayerUpgradeStat(bundle, SyncUtil.TumbleLaunchId);
     }
@@ -54,6 +66,10 @@ public class PunManagerPatch
         // If not host OR single-player, return
         if (SemiFunc.IsNotMasterClient())
             return;
+        
+        #if DEBUG
+        Entry.LogSource.LogInfo($"[{nameof(UpdateSprintSpeedRightAway)}] Upgrade: " + _steamID);
+        #endif
         
         PunBundle bundle = new(__instance, ___photonView, ___statsManager, _steamID);
         SyncManager.PlayerUpgradeStat(bundle, SyncUtil.SprintSpeedId);
@@ -68,6 +84,10 @@ public class PunManagerPatch
         if (SemiFunc.IsNotMasterClient())
             return;
         
+        #if DEBUG
+        Entry.LogSource.LogInfo($"[{nameof(UpdateGrabStrengthRightAway)}] Upgrade: " + _steamID);
+        #endif
+        
         PunBundle bundle = new(__instance, ___photonView, ___statsManager, _steamID);
         SyncManager.PlayerUpgradeStat(bundle, SyncUtil.GrabStrengthId);
     }
@@ -80,6 +100,10 @@ public class PunManagerPatch
         // If not host OR single-player, return
         if (SemiFunc.IsNotMasterClient())
             return;
+        
+        #if DEBUG
+        Entry.LogSource.LogInfo($"[{nameof(UpdateThrowStrengthRightAway)}] Upgrade: " + _steamID);
+        #endif
         
         PunBundle bundle = new(__instance, ___photonView, ___statsManager, _steamID);
         SyncManager.PlayerUpgradeStat(bundle, SyncUtil.GrabThrowId);
@@ -94,6 +118,10 @@ public class PunManagerPatch
         if (SemiFunc.IsNotMasterClient())
             return;
         
+        #if DEBUG
+        Entry.LogSource.LogInfo($"[{nameof(UpdateGrabRangeRightAway)}] Upgrade: " + _steamID);
+        #endif
+        
         PunBundle bundle = new(__instance, ___photonView, ___statsManager, _steamID);
         SyncManager.PlayerUpgradeStat(bundle, SyncUtil.GrabRangeId);
     }
@@ -107,6 +135,10 @@ public class PunManagerPatch
         if (SemiFunc.IsNotMasterClient())
             return;
         
+        #if DEBUG
+        Entry.LogSource.LogInfo($"[{nameof(UpdateExtraJumpRightAway)}] Upgrade: " + _steamID);
+        #endif
+        
         PunBundle bundle = new(__instance, ___photonView, ___statsManager, _steamID);
         SyncManager.PlayerUpgradeStat(bundle, SyncUtil.ExtraJumpId);
     }
@@ -119,6 +151,10 @@ public class PunManagerPatch
         // If not host OR single-player, return
         if (SemiFunc.IsNotMasterClient())
             return;
+        
+        #if DEBUG
+        Entry.LogSource.LogInfo($"[{nameof(UpdateMapPlayerCountRightAway)}] Upgrade: " + _steamID);
+        #endif
         
         PunBundle bundle = new(__instance, ___photonView, ___statsManager, _steamID);
         SyncManager.PlayerUpgradeStat(bundle, SyncUtil.MapPlayerCountId);

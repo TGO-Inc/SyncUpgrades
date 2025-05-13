@@ -51,11 +51,17 @@ public static class SyncManager
         if (steamId == SyncUtil.HostSteamId)
             return;
         
-        // Entry.LogSource.LogInfo("Syncing upgrades for player: " + steamId);
+        #if DEBUG
+        Entry.LogSource.LogInfo($"[{nameof(SyncUpgrades)}] Running sync for: " + steamId);
+        #endif
         
         // Retrieve the local player upgrades
         foreach (UpgradeId? upgradeId in GetUpgradeTypes(bundle).Where(ShouldSync))
         {
+            #if DEBUG
+            Entry.LogSource.LogInfo($"[{nameof(SyncUpgrades)}] {upgradeId}");
+            #endif
+            
             // load the upgrade dictionary
             Dictionary<string, int> upgradeDictionary = SyncUtil.GetUpgrades(bundle.Stats, upgradeId);
             
@@ -85,7 +91,9 @@ public static class SyncManager
     
     public static void PlayerUpgradeStat(PunBundle bundle, UpgradeId upgradeId)
     {
-        // Entry.LogSource.LogInfo("[PlayerUpgradeStat] Syncing upgrade stat: " + upgradeId.RawName);
+        #if DEBUG
+        Entry.LogSource.LogInfo($"[{nameof(PlayerUpgradeStat)}] [{bundle}] {upgradeId}");
+        #endif
         
         // If synchronization is enabled
         if (!ShouldSync(upgradeId))

@@ -1,6 +1,6 @@
 {
   "name": "SyncUpgrades",
-  "version_number": "1.9.2",
+  "version_number": "1.9.4",
   "website_url": "https://github.com/TGO-Inc/SyncUpgrades",
   "description": "Syncs host upgrades with clients in REPO.",
   "dependencies": [

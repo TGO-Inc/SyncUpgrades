@@ -46,7 +46,8 @@ public static class SyncUtil
         UpgradeType.GrabStrength => "Strength",
         UpgradeType.GrabRange => "Range",
         UpgradeType.GrabThrow => "Throw",
-        _ or UpgradeType.Modded => throw new ArgumentException()
+        UpgradeType.Modded => "Modded: Unknown",
+        _ => throw new ArgumentException($"Invalid UpgradeType for {nameof(GetUpgradeName)}")
     };
     
     public static Dictionary<string, int> GetUpgrades(StatsManager stats, UpgradeId id) => id.Type switch
@@ -61,7 +62,7 @@ public static class SyncUtil
         UpgradeType.GrabRange => stats.playerUpgradeRange,
         UpgradeType.GrabThrow => stats.playerUpgradeThrow,
         UpgradeType.Modded => stats.dictionaryOfDictionaries[id.RawName],
-        _ => throw new ArgumentException()
+        _ => throw new ArgumentException($"Invalid UpgradeType for {nameof(GetUpgrades)}")
     };
     
     public static string GetRPCFunctionName(UpgradeType key) => key switch
@@ -75,16 +76,16 @@ public static class SyncUtil
         UpgradeType.GrabStrength => "UpgradePlayerGrabStrengthRPC",
         UpgradeType.GrabRange => "UpgradePlayerGrabRangeRPC",
         UpgradeType.GrabThrow => "UpgradePlayerThrowStrengthRPC",
-        _ or UpgradeType.Modded => throw new ArgumentException()
+        _ or UpgradeType.Modded => throw new ArgumentException($"Invalid UpgradeType for {nameof(GetRPCFunctionName)}")
     };
 
     public static void CallRPCOnePlayer(PunBundle bundle, PlayerAvatar workingPlayer, UpgradeId key)
         => CallRPCOnePlayer(bundle, workingPlayer.SteamId(), key, workingPlayer.photonView.Owner);
     public static void CallRPCOnePlayer(PunBundle bundle, string steamId, UpgradeId key, Player player)
-        => bundle.View.RPC(GetRPCFunctionName(key.Type), player, steamId, ++GetUpgrades(bundle.Stats, key)[steamId]);
+        => bundle.View.LogRPC(GetRPCFunctionName(key.Type), player, steamId, ++GetUpgrades(bundle.Stats, key)[steamId]);
     public static void SyncStatsDictionaryToAll(PunBundle bundle) => bundle.Manager.SyncAllDictionaries();
     public static void CallRPC(PunBundle bundle, string steamId, UpgradeId key)
-        => bundle.View.RPC(GetRPCFunctionName(key.Type), Others, steamId, ++GetUpgrades(bundle.Stats, key)[steamId]);
+        => bundle.View.LogRPC(GetRPCFunctionName(key.Type), Others, steamId, ++GetUpgrades(bundle.Stats, key)[steamId]);
     
     public static int CallUpdateFunction(PunManager instance, string steamId, UpgradeType key) => key switch
     {
