@@ -98,7 +98,7 @@ public static class SyncUtil
         UpgradeType.GrabStrength => instance.UpgradePlayerGrabStrength(steamId),
         UpgradeType.GrabRange => instance.UpgradePlayerGrabRange(steamId),
         UpgradeType.GrabThrow => instance.UpgradePlayerThrowStrength(steamId),
-        _ or UpgradeType.Modded => throw new ArgumentException()
+        _ or UpgradeType.Modded => throw new ArgumentException($"Invalid UpgradeType for {nameof(CallUpdateFunction)}")
     };
     
     public static void UpgradeModded(PunBundle bundle, PlayerAvatar workingPlayer, UpgradeId key, int amount)
