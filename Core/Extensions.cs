@@ -13,9 +13,9 @@ public static class Extensions
     {
         #if DEBUG
         if (!view)
-            Entry.LogSource.LogError("PhotonView is null");
+            Entry.LogSource.LogError($"[{nameof(LogRPC)}] PhotonView is null");
         else
-            Entry.LogSource.LogInfo($"[{nameof(view)}] [{methodName}] To: [{target.NickName}], {view.ViewID}, {view.OwnerActorNr}, {view.Owner}");
+            Entry.LogSource.LogInfo($"[{nameof(LogRPC)}] [{nameof(view)}] [{methodName}] To: [{target.NickName}], {view.ViewID}, {view.OwnerActorNr}, {view.Owner}");
         #endif
         
         view.RPC(methodName, target, parameters);
@@ -25,9 +25,9 @@ public static class Extensions
     {
         #if DEBUG
         if (!view)
-            Entry.LogSource.LogError("PhotonView is null");
+            Entry.LogSource.LogError($"[{nameof(LogRPC)}] PhotonView is null");
         else
-            Entry.LogSource.LogInfo($"[{nameof(view)}] [{methodName}] To: [{target}], {view.ViewID}, {view.OwnerActorNr}, {view.Owner}");
+            Entry.LogSource.LogInfo($"[{nameof(LogRPC)}] [{nameof(view)}] [{methodName}] To: [{target}], {view.ViewID}, {view.OwnerActorNr}, {view.Owner}");
         #endif
         
         view.RPC(methodName, target, parameters);
