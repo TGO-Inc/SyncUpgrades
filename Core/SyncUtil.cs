@@ -3,6 +3,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using System.Collections.Generic;
 using System;
+using REPOLib.Modules;
 
 namespace SyncUpgrades.Core;
 
@@ -104,21 +105,30 @@ public static class SyncUtil
     public static void UpgradeModded(PunBundle bundle, PlayerAvatar workingPlayer, UpgradeId key, int amount)
     {
         string steamId = workingPlayer.SteamId();
-        int newAmt = bundle.Stats.dictionaryOfDictionaries[key.RawName][steamId] += amount;
-        
-        if (REPOLib.Modules.Upgrades.TryGetUpgrade(TrimKey(key.RawName), out REPOLib.Modules.PlayerUpgrade? upgrade))
+        int newAmt = IncrementUpdateDict(bundle, steamId, key, amount);
+
+        if (Upgrades.TryGetUpgrade(TrimKey(key.RawName), out PlayerUpgrade? upgrade))
+        {
+            #if DEBUG
+            Entry.LogSource.LogInfo($"[{nameof(UpgradeModded)}] [{bundle}] {upgrade} {steamId} {newAmt}");
+            #endif
             upgrade.SetLevel(workingPlayer, newAmt);
+        }
         else
-            IncrementUpdateDict(bundle, steamId, key, amount);
+        {
+            #if DEBUG
+            Entry.LogSource.LogError($"[{nameof(UpgradeModded)}] [{bundle}] Upgrade not found in {nameof(REPOLib)}: {key.RawName}");
+            #endif
+        }
     }
 
     public static void IncrementUpdateDictAndSync(PunBundle bundle, string steamId, UpgradeId key, int amount)
     {
-        bundle.Stats.dictionaryOfDictionaries[key.RawName][steamId] += amount;
+        IncrementUpdateDict(bundle, steamId, key, amount);
         bundle.Manager.SyncAllDictionaries();
     }
     
-    public static void IncrementUpdateDict(PunBundle bundle, string steamId, UpgradeId key, int amount)
+    public static int IncrementUpdateDict(PunBundle bundle, string steamId, UpgradeId key, int amount)
         => bundle.Stats.dictionaryOfDictionaries[key.RawName][steamId] += amount;
     
     public static readonly UpgradeId HealthId = new(UpgradeType.Health);

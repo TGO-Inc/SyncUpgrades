@@ -52,7 +52,7 @@ public static class SyncManager
             return;
         
         #if DEBUG
-        Entry.LogSource.LogInfo($"[{nameof(SyncUpgrades)}] Running sync for: " + steamId);
+        Entry.LogSource.LogInfo($"[{nameof(SyncUpgrades)}] [{steamId}]");
         #endif
         
         // Retrieve the local player upgrades
@@ -77,7 +77,7 @@ public static class SyncManager
 
             // Call the corresponding upgrade method based on the upgrade type
             if (upgradeId.Type != UpgradeType.Modded)
-                for (int i = 0; i < diff; i++)
+                for (var i = 0; i < diff; i++)
                     SyncUtil.CallRPCOnePlayer(bundle, workingPlayer, upgradeId);
             else
                 SyncUtil.UpgradeModded(bundle, workingPlayer, upgradeId, diff);

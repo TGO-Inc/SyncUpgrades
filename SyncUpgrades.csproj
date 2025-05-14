@@ -7,27 +7,15 @@
         <IncludeCopyLocalFilesOutputGroup>false</IncludeCopyLocalFilesOutputGroup>
         <Configurations>Debug;Release;</Configurations>
         <Platforms>AnyCPU</Platforms>
-        <Version>1.9.4</Version>
+        <Version>1.9.5</Version>
   </PropertyGroup>
 
   <ItemGroup>
-      <Reference Include="0Harmony">
-        <HintPath>..\..\..\.config\r2modmanPlus-local\REPO\profiles\Default\BepInEx\core\0Harmony.dll</HintPath>
-      <Private>false</Private></Reference>
       <Reference Include="Assembly-CSharp">
         <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\Assembly-CSharp.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="Autodesk.Fbx">
         <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\Autodesk.Fbx.dll</HintPath>
-      <Private>false</Private></Reference>
-      <Reference Include="BepInEx">
-        <HintPath>..\..\..\.config\r2modmanPlus-local\REPO\profiles\Default\BepInEx\core\BepInEx.dll</HintPath>
-      <Private>false</Private></Reference>
-      <Reference Include="BepInEx.Harmony">
-        <HintPath>..\..\..\.config\r2modmanPlus-local\REPO\profiles\Default\BepInEx\core\BepInEx.Harmony.dll</HintPath>
-      <Private>false</Private></Reference>
-      <Reference Include="BepInEx.Preloader">
-        <HintPath>..\..\..\.config\r2modmanPlus-local\REPO\profiles\Default\BepInEx\core\BepInEx.Preloader.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="Facepunch.Steamworks.Win64">
         <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\Facepunch.Steamworks.Win64.dll</HintPath>
@@ -41,26 +29,8 @@
       <Reference Include="Klattersynth">
         <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\Klattersynth.dll</HintPath>
       <Private>false</Private></Reference>
-      <Reference Include="Mono.Cecil">
-        <HintPath>..\..\..\.config\r2modmanPlus-local\REPO\profiles\Default\BepInEx\core\Mono.Cecil.dll</HintPath>
-      <Private>false</Private></Reference>
-      <Reference Include="Mono.Cecil.Mdb">
-        <HintPath>..\..\..\.config\r2modmanPlus-local\REPO\profiles\Default\BepInEx\core\Mono.Cecil.Mdb.dll</HintPath>
-      <Private>false</Private></Reference>
-      <Reference Include="Mono.Cecil.Pdb">
-        <HintPath>..\..\..\.config\r2modmanPlus-local\REPO\profiles\Default\BepInEx\core\Mono.Cecil.Pdb.dll</HintPath>
-      <Private>false</Private></Reference>
-      <Reference Include="Mono.Cecil.Rocks">
-        <HintPath>..\..\..\.config\r2modmanPlus-local\REPO\profiles\Default\BepInEx\core\Mono.Cecil.Rocks.dll</HintPath>
-      <Private>false</Private></Reference>
       <Reference Include="Mono.Security">
         <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\Mono.Security.dll</HintPath>
-      <Private>false</Private></Reference>
-      <Reference Include="MonoMod.RuntimeDetour">
-        <HintPath>..\..\..\.config\r2modmanPlus-local\REPO\profiles\Default\BepInEx\core\MonoMod.RuntimeDetour.dll</HintPath>
-      <Private>false</Private></Reference>
-      <Reference Include="MonoMod.Utils">
-        <HintPath>..\..\..\.config\r2modmanPlus-local\REPO\profiles\Default\BepInEx\core\MonoMod.Utils.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="mscorlib">
         <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\mscorlib.dll</HintPath>
@@ -399,4 +369,10 @@
         <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\websocket-sharp.dll</HintPath>
       <Private>false</Private></Reference>
   </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="HarmonyX" Version="2.14.0" />
+        <PackageReference Include="BepInEx.AssemblyPublicizer.MSBuild" Version="0.4.2" PrivateAssets="all"/>
+        <PackageReference Include="BepInEx.Core" Version="5.4.21"/>
+    </ItemGroup>
 </Project>
