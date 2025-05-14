@@ -84,7 +84,13 @@ public static class SyncUtil
         => CallRPCOnePlayer(bundle, workingPlayer.SteamId(), key, workingPlayer.photonView.Owner);
     public static void CallRPCOnePlayer(PunBundle bundle, string steamId, UpgradeId key, Player player)
         => bundle.View.LogRPC(GetRPCFunctionName(key.Type), player, steamId, ++GetUpgrades(bundle.Stats, key)[steamId]);
-    public static void SyncStatsDictionaryToAll(PunBundle bundle) => bundle.Manager.SyncAllDictionaries();
+    public static void SyncStatsDictionaryToAll(PunBundle bundle)
+    {
+        #if DEBUG
+        Entry.LogSource.LogInfo($"[{nameof(SyncStatsDictionaryToAll)}] [{bundle}]");
+        #endif
+        bundle.Manager.SyncAllDictionaries();
+    }
     public static void CallRPC(PunBundle bundle, string steamId, UpgradeId key)
         => bundle.View.LogRPC(GetRPCFunctionName(key.Type), Others, steamId, ++GetUpgrades(bundle.Stats, key)[steamId]);
     
@@ -125,7 +131,7 @@ public static class SyncUtil
     public static void IncrementUpdateDictAndSync(PunBundle bundle, string steamId, UpgradeId key, int amount)
     {
         IncrementUpdateDict(bundle, steamId, key, amount);
-        bundle.Manager.SyncAllDictionaries();
+        SyncStatsDictionaryToAll(bundle);
     }
     
     public static int IncrementUpdateDict(PunBundle bundle, string steamId, UpgradeId key, int amount)
