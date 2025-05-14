@@ -129,8 +129,13 @@ public static class SyncUtil
     }
     
     public static int IncrementUpdateDict(PunBundle bundle, string steamId, UpgradeId key, int amount)
-        => bundle.Stats.dictionaryOfDictionaries[key.RawName][steamId] += amount;
-    
+    {
+        #if DEBUG
+        Entry.LogSource.LogInfo($"[{nameof(IncrementUpdateDict)}] [{bundle}] {key} {steamId} {amount}");
+        #endif
+        return bundle.Stats.dictionaryOfDictionaries[key.RawName][steamId] += amount;
+    }
+
     public static readonly UpgradeId HealthId = new(UpgradeType.Health);
     public static readonly UpgradeId StaminaId = new(UpgradeType.Stamina);
     public static readonly UpgradeId ExtraJumpId = new(UpgradeType.ExtraJump);
