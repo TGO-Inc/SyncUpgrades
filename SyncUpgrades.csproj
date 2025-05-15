@@ -7,7 +7,7 @@
         <IncludeCopyLocalFilesOutputGroup>false</IncludeCopyLocalFilesOutputGroup>
         <Configurations>Debug;Release;</Configurations>
         <Platforms>AnyCPU</Platforms>
-        <Version>1.9.5</Version>
+        <Version>2.0.2</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,15 +22,6 @@
       <Private>false</Private></Reference>
       <Reference Include="FbxBuildTestAssets">
         <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\FbxBuildTestAssets.dll</HintPath>
-      <Private>false</Private></Reference>
-      <Reference Include="HarmonyXInterop">
-        <HintPath>..\..\..\.config\r2modmanPlus-local\REPO\profiles\Default\BepInEx\core\HarmonyXInterop.dll</HintPath>
-      <Private>false</Private></Reference>
-      <Reference Include="Klattersynth">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\Klattersynth.dll</HintPath>
-      <Private>false</Private></Reference>
-      <Reference Include="Mono.Security">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\Mono.Security.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="mscorlib">
         <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\mscorlib.dll</HintPath>
@@ -371,8 +362,6 @@
   </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="HarmonyX" Version="2.14.0" />
-        <PackageReference Include="BepInEx.AssemblyPublicizer.MSBuild" Version="0.4.2" PrivateAssets="all"/>
         <PackageReference Include="BepInEx.Core" Version="5.4.21"/>
     </ItemGroup>
 </Project>

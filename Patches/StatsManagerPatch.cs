@@ -11,7 +11,7 @@ internal class StatsManagerPatch
     private static void PlayerAdd(string _steamID, string _playerName)
     {
         // If not host OR single-player, return
-        if (SemiFunc.IsNotMasterClient())
+        if (SemiFunc.IsNotMasterClient() || SemiFunc.MenuLevel())
             return;
         
         #if DEBUG
@@ -19,6 +19,6 @@ internal class StatsManagerPatch
         #endif
         
         // Sync the upgrades
-        SyncManager.SyncUpgrades(_steamID);
+        SyncManager.SyncHostToTarget(_steamID);
     }
 }

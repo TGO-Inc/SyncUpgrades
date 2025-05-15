@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using BepInEx.Configuration;
+﻿using BepInEx.Configuration;
 using BepInEx.Logging;
 using BepInEx;
 using HarmonyLib;
@@ -13,7 +12,7 @@ namespace SyncUpgrades;
 public class Entry : BaseUnityPlugin
 {
     private const string PluginName = "Sync Upgrades";
-    private const string PluginVersion = "1.9.5";
+    private const string PluginVersion = "2.0.2";
     private const string PluginId = "TGO.SyncUpgrades";
 
     private static readonly Harmony Harmony = new(PluginId);
@@ -37,5 +36,10 @@ public class Entry : BaseUnityPlugin
         
         // Log startup
         LogSource.LogInfo("Sync Upgrades loaded!");
+    }
+
+    private void FixedUpdate()
+    {
+        SyncUtil.RunOneRPC();
     }
 }

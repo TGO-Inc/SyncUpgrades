@@ -20,8 +20,8 @@ public class PunManagerPatch
         Entry.LogSource.LogInfo($"[{nameof(UpdateHealthRightAway)}] Upgrade: " + playerName);
         #endif
         
-        PunBundle bundle = new(__instance, ___photonView, ___statsManager, playerName);
-        SyncManager.PlayerUpgradeStat(bundle, SyncUtil.HealthId);
+        SyncBundle bundle = new(__instance, ___photonView, ___statsManager, playerName);
+        SyncManager.PlayerConsumedUpgrade(bundle, SyncUtil.HealthId);
     }
     
     // UpgradePlayerEnergy
@@ -37,8 +37,8 @@ public class PunManagerPatch
         Entry.LogSource.LogInfo($"[{nameof(UpdateEnergyRightAway)}] Upgrade: " + _steamID);
         #endif
         
-        PunBundle bundle = new(__instance, ___photonView, ___statsManager, _steamID);
-        SyncManager.PlayerUpgradeStat(bundle, SyncUtil.StaminaId);
+        SyncBundle bundle = new(__instance, ___photonView, ___statsManager, _steamID);
+        SyncManager.PlayerConsumedUpgrade(bundle, SyncUtil.StaminaId);
     }
     
     // UpgradePlayerTumbleLaunch
@@ -54,8 +54,8 @@ public class PunManagerPatch
         Entry.LogSource.LogInfo($"[{nameof(UpdateTumbleLaunchRightAway)}] Upgrade: " + _steamID);
         #endif
         
-        PunBundle bundle = new(__instance, ___photonView, ___statsManager, _steamID);
-        SyncManager.PlayerUpgradeStat(bundle, SyncUtil.TumbleLaunchId);
+        SyncBundle bundle = new(__instance, ___photonView, ___statsManager, _steamID);
+        SyncManager.PlayerConsumedUpgrade(bundle, SyncUtil.TumbleLaunchId);
     }
     
     // UpgradePlayerSprintSpeed
@@ -71,8 +71,8 @@ public class PunManagerPatch
         Entry.LogSource.LogInfo($"[{nameof(UpdateSprintSpeedRightAway)}] Upgrade: " + _steamID);
         #endif
         
-        PunBundle bundle = new(__instance, ___photonView, ___statsManager, _steamID);
-        SyncManager.PlayerUpgradeStat(bundle, SyncUtil.SprintSpeedId);
+        SyncBundle bundle = new(__instance, ___photonView, ___statsManager, _steamID);
+        SyncManager.PlayerConsumedUpgrade(bundle, SyncUtil.SprintSpeedId);
     }
     
     // UpgradePlayerGrabStrength
@@ -88,8 +88,8 @@ public class PunManagerPatch
         Entry.LogSource.LogInfo($"[{nameof(UpdateGrabStrengthRightAway)}] Upgrade: " + _steamID);
         #endif
         
-        PunBundle bundle = new(__instance, ___photonView, ___statsManager, _steamID);
-        SyncManager.PlayerUpgradeStat(bundle, SyncUtil.GrabStrengthId);
+        SyncBundle bundle = new(__instance, ___photonView, ___statsManager, _steamID);
+        SyncManager.PlayerConsumedUpgrade(bundle, SyncUtil.GrabStrengthId);
     }
     
     // UpgradePlayerThrowStrength
@@ -105,8 +105,8 @@ public class PunManagerPatch
         Entry.LogSource.LogInfo($"[{nameof(UpdateThrowStrengthRightAway)}] Upgrade: " + _steamID);
         #endif
         
-        PunBundle bundle = new(__instance, ___photonView, ___statsManager, _steamID);
-        SyncManager.PlayerUpgradeStat(bundle, SyncUtil.GrabThrowId);
+        SyncBundle bundle = new(__instance, ___photonView, ___statsManager, _steamID);
+        SyncManager.PlayerConsumedUpgrade(bundle, SyncUtil.GrabThrowId);
     }
 
     // UpgradePlayerGrabRange
@@ -122,8 +122,8 @@ public class PunManagerPatch
         Entry.LogSource.LogInfo($"[{nameof(UpdateGrabRangeRightAway)}] Upgrade: " + _steamID);
         #endif
         
-        PunBundle bundle = new(__instance, ___photonView, ___statsManager, _steamID);
-        SyncManager.PlayerUpgradeStat(bundle, SyncUtil.GrabRangeId);
+        SyncBundle bundle = new(__instance, ___photonView, ___statsManager, _steamID);
+        SyncManager.PlayerConsumedUpgrade(bundle, SyncUtil.GrabRangeId);
     }
     
     // UpgradePlayerExtraJump
@@ -139,8 +139,8 @@ public class PunManagerPatch
         Entry.LogSource.LogInfo($"[{nameof(UpdateExtraJumpRightAway)}] Upgrade: " + _steamID);
         #endif
         
-        PunBundle bundle = new(__instance, ___photonView, ___statsManager, _steamID);
-        SyncManager.PlayerUpgradeStat(bundle, SyncUtil.ExtraJumpId);
+        SyncBundle bundle = new(__instance, ___photonView, ___statsManager, _steamID);
+        SyncManager.PlayerConsumedUpgrade(bundle, SyncUtil.ExtraJumpId);
     }
     
     // UpgradeMapPlayerCount
@@ -156,7 +156,7 @@ public class PunManagerPatch
         Entry.LogSource.LogInfo($"[{nameof(UpdateMapPlayerCountRightAway)}] Upgrade: " + _steamID);
         #endif
         
-        PunBundle bundle = new(__instance, ___photonView, ___statsManager, _steamID);
-        SyncManager.PlayerUpgradeStat(bundle, SyncUtil.MapPlayerCountId);
+        SyncBundle bundle = new(__instance, ___photonView, ___statsManager, _steamID);
+        SyncManager.PlayerConsumedUpgrade(bundle, SyncUtil.MapPlayerCountId);
     }
 }

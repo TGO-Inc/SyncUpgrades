@@ -14,13 +14,11 @@ internal class RunManagerPatch
         if (SemiFunc.IsNotMasterClient() || _levelFailed)
             return;
         
-        
         #if DEBUG
         Entry.LogSource.LogInfo($"[ChangeLevel] [{___restarting}] [{SemiFunc.MenuLevel()}] [{_completedLevel}] [{_levelFailed}] Syncing upgrades for all players");
         #endif
         
         // Sync the upgrades
-        PunBundle defaultBundle = new(PunManager.instance, PunManager.instance.GetView(), StatsManager.instance, SyncUtil.HostSteamId);
-        SyncManager.SyncAll(defaultBundle);
+        SyncManager.SyncHostToAll();
     }
 }
