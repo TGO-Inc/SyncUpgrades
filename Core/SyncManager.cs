@@ -76,9 +76,11 @@ public static class SyncManager
     public static bool SyncHostToTarget(string targetSteamId)
     {
         SyncBundle bundle = SyncBundle.Default(targetSteamId);
-        bool result = SyncHostToTarget(bundle, SyncUtil.GetPlayer(targetSteamId));
+        if (!SyncHostToTarget(bundle, SyncUtil.GetPlayer(targetSteamId)))
+            return false;
+        
         SyncUtil.SyncStatsDictionaryToAll(bundle);
-        return result;
+        return true;
     }
 
     public static void SyncHostToAll() 
