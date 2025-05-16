@@ -1,8 +1,8 @@
 {
   "name": "SyncUpgrades",
-  "version_number": "2.0.5",
+  "version_number": "2.0.7",
   "website_url": "https://github.com/TGO-Inc/SyncUpgrades",
-  "description": "Syncs host upgrades with clients in REPO.",
+  "description": "Syncs upgrades between all players in a game. Client -> Host -> All or Host -> All.",
   "dependencies": [
     "Zehs-REPOLib-2.1.0"
   ]

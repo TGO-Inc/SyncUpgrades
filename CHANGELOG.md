@@ -1,3 +1,13 @@
+# 2.0.7
+- [x] Fixed modded upgrade synchronization (now works 100% for REPOLib registered upgrades)
+- [x] [Fixed client disconnect bug when duplicate networking operations are sent (removed duplicate networking)](#2)
+- Rewrote SyncManager & removed ALL instances of duplicate networking
+- Added ISyncRequest queue and queue processing for network operations
+  - Operations are now execute per FixedUpdate instead of per iteration
+- Changed BepInEx version to 5.4.21
+- Migrated project settings to use NuGet packages for some dependencies
+- Added tons of logging to the debug builds (on GitHub)
+
 # 1.9.2
 - Fixed accidental DOS on clients. Some reason the game calls "ChangeLevel" 17 trillion times when the game restarts after the arena
 
