@@ -7,7 +7,8 @@ namespace SyncUpgrades.Patches;
 internal class StatsManagerPatch
 {
     [HarmonyPostfix]
-    [HarmonyPatch("PlayerAdd", typeof(string), typeof(string))]
+    [HarmonyWrapSafe]
+    [HarmonyPatch(nameof(PlayerAdd), typeof(string), typeof(string))]
     private static void PlayerAdd(string _steamID, string _playerName)
     {
         // If not host OR single-player, return

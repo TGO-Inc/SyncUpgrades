@@ -6,9 +6,10 @@ using SyncUpgrades.Core;
 namespace SyncUpgrades.Patches;
 
 [HarmonyPatch(typeof(Upgrades))]
-public class UpgradesPatch
+internal class UpgradesPatch
 {
     [HarmonyPostfix]
+    [HarmonyWrapSafe]
     [HarmonyPatch(nameof(HandleUpgradeEvent))]
     private static void HandleUpgradeEvent(EventData eventData)
     {
@@ -35,6 +36,7 @@ public class UpgradesPatch
     }
     
     [HarmonyPostfix]
+    [HarmonyWrapSafe]
     [HarmonyPatch(nameof(RaiseUpgradeEvent))]
     private static void RaiseUpgradeEvent(string upgradeId, string steamId, int level)
     {

@@ -1,6 +1,6 @@
 namespace SyncUpgrades.Core;
 
-public record SyncRequest(SyncBundle Bundle) : ISyncRequest
+internal record SyncRequest(SyncBundle Bundle) : ISyncRequest
 {
     public void Run()
     {

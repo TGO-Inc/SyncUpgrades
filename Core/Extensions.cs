@@ -3,7 +3,7 @@ using Photon.Realtime;
 
 namespace SyncUpgrades.Core;
 
-public static class Extensions
+internal static class Extensions
 {
     public static string SteamId(this PlayerAvatar avatar) 
         => SemiFunc.PlayerGetSteamID(avatar);

@@ -1,6 +1,6 @@
 namespace SyncUpgrades.Core;
 
-public interface ISyncRequest
+internal interface ISyncRequest
 {
     public void Run();
 }

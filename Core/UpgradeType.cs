@@ -1,5 +1,11 @@
+using JetBrains.Annotations;
+
 namespace SyncUpgrades.Core;
 
+/// <summary>
+/// Vanilla and modded upgrade types.
+/// </summary>
+[PublicAPI]
 public enum UpgradeType
 {
     Modded,
@@ -11,5 +17,7 @@ public enum UpgradeType
     SprintSpeed,
     GrabStrength,
     GrabRange,
-    GrabThrow
+    GrabThrow,
+    TumbleWings,
+    CrouchRest,
 }

@@ -1,162 +1,106 @@
+using System.Runtime.CompilerServices;
 using HarmonyLib;
 using Photon.Pun;
 using SyncUpgrades.Core;
+using SyncUpgrades.Core.Internal;
 
 namespace SyncUpgrades.Patches;
 
 [HarmonyPatch(typeof(PunManager))]
-public class PunManagerPatch
+internal class PunManagerPatch
 {
     // UpgradePlayerHealth
     [HarmonyPrefix]
-    [HarmonyPatch("UpdateHealthRightAway", typeof(string))]
+    [HarmonyWrapSafe]
+    [HarmonyPatch(nameof(UpdateHealthRightAway), typeof(string))]
     private static void UpdateHealthRightAway(PunManager __instance, PhotonView ___photonView, StatsManager ___statsManager, string playerName)
-    {
-        // If not host OR single-player, return
-        if (SemiFunc.IsNotMasterClient())
-            return;
-        
-        #if DEBUG
-        Entry.LogSource.LogInfo($"[{nameof(UpdateHealthRightAway)}] Upgrade: " + playerName);
-        #endif
-        
-        SyncBundle bundle = new(__instance, ___photonView, ___statsManager, playerName);
-        SyncManager.PlayerConsumedUpgrade(bundle, SyncUtil.HealthId);
-    }
+        => UpgradeWrapper(__instance, ___photonView, ___statsManager, playerName, SyncUtil.HealthId);
     
     // UpgradePlayerEnergy
     [HarmonyPrefix]
-    [HarmonyPatch("UpdateEnergyRightAway", typeof(string))]
+    [HarmonyWrapSafe]
+    [HarmonyPatch(nameof(UpdateEnergyRightAway), typeof(string))]
     private static void UpdateEnergyRightAway(PunManager __instance, PhotonView ___photonView, StatsManager ___statsManager, string _steamID)
-    {
-        // If not host OR single-player, return
-        if (SemiFunc.IsNotMasterClient())
-            return;
-        
-        #if DEBUG
-        Entry.LogSource.LogInfo($"[{nameof(UpdateEnergyRightAway)}] Upgrade: " + _steamID);
-        #endif
-        
-        SyncBundle bundle = new(__instance, ___photonView, ___statsManager, _steamID);
-        SyncManager.PlayerConsumedUpgrade(bundle, SyncUtil.StaminaId);
-    }
+        => UpgradeWrapper(__instance, ___photonView, ___statsManager, _steamID, SyncUtil.StaminaId);
     
     // UpgradePlayerTumbleLaunch
     [HarmonyPrefix]
-    [HarmonyPatch("UpdateTumbleLaunchRightAway", typeof(string))]
+    [HarmonyWrapSafe]
+    [HarmonyPatch(nameof(UpdateTumbleLaunchRightAway), typeof(string))]
     private static void UpdateTumbleLaunchRightAway(PunManager __instance, PhotonView ___photonView, StatsManager ___statsManager, string _steamID)
-    {
-        // If not host OR single-player, return
-        if (SemiFunc.IsNotMasterClient())
-            return;
-        
-        #if DEBUG
-        Entry.LogSource.LogInfo($"[{nameof(UpdateTumbleLaunchRightAway)}] Upgrade: " + _steamID);
-        #endif
-        
-        SyncBundle bundle = new(__instance, ___photonView, ___statsManager, _steamID);
-        SyncManager.PlayerConsumedUpgrade(bundle, SyncUtil.TumbleLaunchId);
-    }
+        => UpgradeWrapper(__instance, ___photonView, ___statsManager, _steamID, SyncUtil.TumbleLaunchId);
     
     // UpgradePlayerSprintSpeed
     [HarmonyPrefix]
-    [HarmonyPatch("UpdateSprintSpeedRightAway", typeof(string))]
+    [HarmonyWrapSafe]
+    [HarmonyPatch(nameof(UpdateSprintSpeedRightAway), typeof(string))]
     private static void UpdateSprintSpeedRightAway(PunManager __instance, PhotonView ___photonView, StatsManager ___statsManager, string _steamID)
-    {
-        // If not host OR single-player, return
-        if (SemiFunc.IsNotMasterClient())
-            return;
-        
-        #if DEBUG
-        Entry.LogSource.LogInfo($"[{nameof(UpdateSprintSpeedRightAway)}] Upgrade: " + _steamID);
-        #endif
-        
-        SyncBundle bundle = new(__instance, ___photonView, ___statsManager, _steamID);
-        SyncManager.PlayerConsumedUpgrade(bundle, SyncUtil.SprintSpeedId);
-    }
+        => UpgradeWrapper(__instance, ___photonView, ___statsManager, _steamID, SyncUtil.SprintSpeedId);
     
     // UpgradePlayerGrabStrength
     [HarmonyPrefix]
-    [HarmonyPatch("UpdateGrabStrengthRightAway", typeof(string))]
+    [HarmonyWrapSafe]
+    [HarmonyPatch(nameof(UpdateGrabStrengthRightAway), typeof(string))]
     private static void UpdateGrabStrengthRightAway(PunManager __instance, PhotonView ___photonView, StatsManager ___statsManager, string _steamID)
-    {
-        // If not host OR single-player, return
-        if (SemiFunc.IsNotMasterClient())
-            return;
-        
-        #if DEBUG
-        Entry.LogSource.LogInfo($"[{nameof(UpdateGrabStrengthRightAway)}] Upgrade: " + _steamID);
-        #endif
-        
-        SyncBundle bundle = new(__instance, ___photonView, ___statsManager, _steamID);
-        SyncManager.PlayerConsumedUpgrade(bundle, SyncUtil.GrabStrengthId);
-    }
+        => UpgradeWrapper(__instance, ___photonView, ___statsManager, _steamID, SyncUtil.GrabStrengthId);
     
     // UpgradePlayerThrowStrength
     [HarmonyPrefix]
-    [HarmonyPatch("UpdateThrowStrengthRightAway", typeof(string))]
+    [HarmonyWrapSafe]
+    [HarmonyPatch(nameof(UpdateThrowStrengthRightAway), typeof(string))]
     private static void UpdateThrowStrengthRightAway(PunManager __instance, PhotonView ___photonView, StatsManager ___statsManager, string _steamID)
-    {
-        // If not host OR single-player, return
-        if (SemiFunc.IsNotMasterClient())
-            return;
-        
-        #if DEBUG
-        Entry.LogSource.LogInfo($"[{nameof(UpdateThrowStrengthRightAway)}] Upgrade: " + _steamID);
-        #endif
-        
-        SyncBundle bundle = new(__instance, ___photonView, ___statsManager, _steamID);
-        SyncManager.PlayerConsumedUpgrade(bundle, SyncUtil.GrabThrowId);
-    }
+        => UpgradeWrapper(__instance, ___photonView, ___statsManager, _steamID, SyncUtil.GrabThrowId);
 
     // UpgradePlayerGrabRange
     [HarmonyPrefix]
-    [HarmonyPatch("UpdateGrabRangeRightAway", typeof(string))]
+    [HarmonyWrapSafe]
+    [HarmonyPatch(nameof(UpdateGrabRangeRightAway), typeof(string))]
     private static void UpdateGrabRangeRightAway(PunManager __instance, PhotonView ___photonView, StatsManager ___statsManager, string _steamID)
-    {
-        // If not host OR single-player, return
-        if (SemiFunc.IsNotMasterClient())
-            return;
-        
-        #if DEBUG
-        Entry.LogSource.LogInfo($"[{nameof(UpdateGrabRangeRightAway)}] Upgrade: " + _steamID);
-        #endif
-        
-        SyncBundle bundle = new(__instance, ___photonView, ___statsManager, _steamID);
-        SyncManager.PlayerConsumedUpgrade(bundle, SyncUtil.GrabRangeId);
-    }
+        => UpgradeWrapper(__instance, ___photonView, ___statsManager, _steamID, SyncUtil.GrabRangeId);
     
     // UpgradePlayerExtraJump
     [HarmonyPrefix]
-    [HarmonyPatch("UpdateExtraJumpRightAway", typeof(string))]
+    [HarmonyWrapSafe]
+    [HarmonyPatch(nameof(UpdateExtraJumpRightAway), typeof(string))]
     private static void UpdateExtraJumpRightAway(PunManager __instance, PhotonView ___photonView, StatsManager ___statsManager, string _steamID)
-    {
-        // If not host OR single-player, return
-        if (SemiFunc.IsNotMasterClient())
-            return;
-        
-        #if DEBUG
-        Entry.LogSource.LogInfo($"[{nameof(UpdateExtraJumpRightAway)}] Upgrade: " + _steamID);
-        #endif
-        
-        SyncBundle bundle = new(__instance, ___photonView, ___statsManager, _steamID);
-        SyncManager.PlayerConsumedUpgrade(bundle, SyncUtil.ExtraJumpId);
-    }
+        => UpgradeWrapper(__instance, ___photonView, ___statsManager, _steamID, SyncUtil.ExtraJumpId);
     
     // UpgradeMapPlayerCount
     [HarmonyPrefix]
-    [HarmonyPatch("UpdateMapPlayerCountRightAway", typeof(string))]
+    [HarmonyWrapSafe]
+    [HarmonyPatch(nameof(UpdateMapPlayerCountRightAway), typeof(string))]
     private static void UpdateMapPlayerCountRightAway(PunManager __instance, PhotonView ___photonView, StatsManager ___statsManager, string _steamID)
+        => UpgradeWrapper(__instance, ___photonView, ___statsManager, _steamID, SyncUtil.MapPlayerCountId);
+    
+    // UpgradePlayerTumbleWings
+    [HarmonyPrefix]
+    [HarmonyWrapSafe]
+    [IgnoreMethodNotFoundPatchException]
+    [HarmonyPatch(nameof(UpdateTumbleWingsRightAway), typeof(string))]
+    private static void UpdateTumbleWingsRightAway(PunManager __instance, PhotonView ___photonView, StatsManager ___statsManager, string _steamID)
+        => UpgradeWrapper(__instance, ___photonView, ___statsManager, _steamID, SyncUtil.TumbleWingsId);
+    
+    // UpgradeCrouchRest
+    [HarmonyPrefix]
+    [HarmonyWrapSafe]
+    [IgnoreMethodNotFoundPatchException]
+    [HarmonyPatch(nameof(UpdateCrouchRestRightAway), typeof(string))]
+    private static void UpdateCrouchRestRightAway(PunManager __instance, PhotonView ___photonView, StatsManager ___statsManager, string _steamID)
+        => UpgradeWrapper(__instance, ___photonView, ___statsManager, _steamID, SyncUtil.CrouchRestId);
+
+    private static void UpgradeWrapper(
+        PunManager __instance, PhotonView ___photonView, StatsManager ___statsManager, 
+        string _steamID, UpgradeId upgrade, [CallerMemberName] string methodName = "Unknown Caller Method")
     {
         // If not host OR single-player, return
         if (SemiFunc.IsNotMasterClient())
             return;
         
         #if DEBUG
-        Entry.LogSource.LogInfo($"[{nameof(UpdateMapPlayerCountRightAway)}] Upgrade: " + _steamID);
+        Entry.LogSource.LogInfo($"[{methodName}] Upgrade: " + _steamID);
         #endif
         
-        SyncBundle bundle = new(__instance, ___photonView, ___statsManager, _steamID);
-        SyncManager.PlayerConsumedUpgrade(bundle, SyncUtil.MapPlayerCountId);
+        SyncBundle bundle = new(new PunManagerWrapper(__instance), ___photonView, ___statsManager, _steamID);
+        SyncManager.PlayerConsumedUpgrade(bundle, upgrade);
     }
 }

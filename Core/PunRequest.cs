@@ -3,7 +3,7 @@ using Photon.Realtime;
 
 namespace SyncUpgrades.Core;
 
-public record PunRequest(PhotonView View, string MethodName, object Target, object[] Parameters) : ISyncRequest
+internal record PunRequest(PhotonView View, string MethodName, object Target, object[] Parameters) : ISyncRequest
 {
     public static PunRequest New(PhotonView view, string methodName, object target, object[] parameters)
         => new(view,methodName,target, parameters);

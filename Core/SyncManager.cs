@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using BepInEx.Configuration;
 using JetBrains.Annotations;
-using Sirenix.Utilities;
 
 namespace SyncUpgrades.Core;
 
@@ -11,35 +10,40 @@ namespace SyncUpgrades.Core;
 public static class SyncManager
 {
     private const string Section = "Sync";
-    private static ConfigEntry<bool>? _syncHealth;
-    private static ConfigEntry<bool>? _syncStamina;
-    private static ConfigEntry<bool>? _syncExtraJump;
-    private static ConfigEntry<bool>? _syncMapPlayerCount;
-    private static ConfigEntry<bool>? _syncGrabRange;
-    private static ConfigEntry<bool>? _syncGrabStrength;
-    private static ConfigEntry<bool>? _syncGrabThrow;
-    private static ConfigEntry<bool>? _syncSprintSpeed;
-    private static ConfigEntry<bool>? _syncTumbleLaunch;
-    private static ConfigEntry<bool>? _moddedUpgrades;
+    private static ConfigEntry<bool> _syncHealth         = Entry.BepConfig.Bind(Section, "Health", true, "Sync Max Health");
+    private static ConfigEntry<bool> _syncStamina        = Entry.BepConfig.Bind(Section, "Stamina", true, "Sync Max Stamina");
+    private static ConfigEntry<bool> _syncExtraJump      = Entry.BepConfig.Bind(Section, "Extra Jump", true, "Sync Extra Jump Count");
+    private static ConfigEntry<bool> _syncMapPlayerCount = Entry.BepConfig.Bind(Section, "Tumble Launch", true, "Sync Tumble Launch Count");
+    private static ConfigEntry<bool> _syncGrabRange      = Entry.BepConfig.Bind(Section, "Map Player Count", true, "Sync Map Player Count");
+    private static ConfigEntry<bool> _syncGrabStrength   = Entry.BepConfig.Bind(Section, "Sprint Speed", false, "Sync Sprint Speed");
+    private static ConfigEntry<bool> _syncGrabThrow      = Entry.BepConfig.Bind(Section, "Grab Strength", true, "Sync Grab Strength");
+    private static ConfigEntry<bool> _syncSprintSpeed    = Entry.BepConfig.Bind(Section, "Grab Range", true, "Sync Grab Range");
+    private static ConfigEntry<bool> _syncTumbleLaunch   = Entry.BepConfig.Bind(Section, "Grab Throw", true, "Sync Grab Throw");
+    private static ConfigEntry<bool> _syncTumbleWings    = Entry.BepConfig.Bind(Section, "Tumble Wings", true, "Sync Tumble Wings");
+    private static ConfigEntry<bool> _syncCrouchRest     = Entry.BepConfig.Bind(Section, "Crouch Rest", true, "Sync Crouch Rest");
+    private static ConcurrentDictionary<UpgradeId, ConfigEntry<bool>> _registeredModdedUpgrades = [];
 
     internal static void Init()
     {
         // Initialize configuration
-        _syncHealth = Entry.BepConfig.Bind(Section, "Health", true, "Sync Max Health");
-        _syncStamina = Entry.BepConfig.Bind(Section, "Stamina", true, "Sync Max Stamina");
-        _syncExtraJump = Entry.BepConfig.Bind(Section, "Extra Jump", true, "Sync Extra Jump Count");
-        _syncTumbleLaunch = Entry.BepConfig.Bind(Section, "Tumble Launch", true, "Sync Tumble Launch Count");
-        _syncMapPlayerCount = Entry.BepConfig.Bind(Section, "Map Player Count", true, "Sync Map Player Count");
-        _syncSprintSpeed = Entry.BepConfig.Bind(Section, "Sprint Speed", false, "Sync Sprint Speed");
-        _syncGrabStrength = Entry.BepConfig.Bind(Section, "Grab Strength", true, "Sync Grab Strength");
-        _syncGrabRange = Entry.BepConfig.Bind(Section, "Grab Range", true, "Sync Grab Range");
-        _syncGrabThrow = Entry.BepConfig.Bind(Section, "Grab Throw", true, "Sync Grab Throw");
-        _moddedUpgrades = Entry.BepConfig.Bind(Section, "Modded Upgrades", true, "Sync Misc Modded Upgrades");
+        // _registeredModdedUpgrades = Entry.BepConfig.Bind(Section, "Modded Upgrades", true, "Sync Misc Modded Upgrades");
     }
 
+    /// <summary>
+    /// Informs the <see cref="SyncManager"/> that an upgrade has been consumed by a player.
+    /// </summary>
+    /// <param name="steamId"></param>
+    /// <param name="upgrade"></param>
+    /// <param name="newLevel"></param>
     public static void PlayerConsumedUpgrade(string steamId, UpgradeId upgrade, int newLevel) 
         => PlayerConsumedUpgrade(SyncBundle.Default(steamId), upgrade, newLevel);
     
+    /// <summary>
+    /// <inheritdoc cref="PlayerConsumedUpgrade(string, UpgradeId, int)"/>
+    /// </summary>
+    /// <param name="bundle"></param>
+    /// <param name="upgrade"></param>
+    /// <param name="newLevel"></param>
     public static void PlayerConsumedUpgrade(SyncBundle bundle, UpgradeId upgrade, int newLevel = 0)
     {
         // If synchronization is enabled
@@ -73,6 +77,11 @@ public static class SyncManager
         SyncHostToAll(bundle);
     }
     
+    /// <summary>
+    /// Synchronizes the host's upgrades to the target player.
+    /// </summary>
+    /// <param name="targetSteamId"></param>
+    /// <returns></returns>
     public static bool SyncHostToTarget(string targetSteamId)
     {
         SyncBundle bundle = SyncBundle.Default(targetSteamId);
@@ -83,18 +92,38 @@ public static class SyncManager
         return true;
     }
 
+    /// <summary>
+    /// Synchronizes the host's upgrades to all players.
+    /// </summary>
     public static void SyncHostToAll() 
         => SyncHostToAll(SyncBundle.Default(SyncUtil.HostSteamId));
 
+    /// <summary>
+    /// <inheritdoc cref="SyncHostToAll()"/>
+    /// </summary>
+    /// <param name="bundle"></param>
     public static void SyncHostToAll(SyncBundle bundle)
     {
         if (SemiFunc.PlayerGetAll().Where(NotHost).Aggregate(false, (current, player) => current || SyncHostToTarget(bundle, player)))
             SyncUtil.SyncStatsDictionaryToAll(bundle);
     }
 
+    /// <summary>
+    /// Synchronizes the host's upgrades to the target player.
+    /// </summary>
+    /// <param name="bundle"></param>
+    /// <param name="target"></param>
+    /// <returns></returns>
     private static bool SyncHostToTarget(SyncBundle bundle, PlayerAvatar target)
         => SyncFromSourceToTarget(bundle, SyncUtil.Local, target);
     
+    /// <summary>
+    /// Synchronizes the source player's upgrades to the target player.
+    /// </summary>
+    /// <param name="bundle"></param>
+    /// <param name="source"></param>
+    /// <param name="target"></param>
+    /// <returns></returns>
     private static bool SyncFromSourceToTarget(SyncBundle bundle, PlayerAvatar source, PlayerAvatar target)
     {
         string sourceId = source.SteamId();
@@ -144,19 +173,32 @@ public static class SyncManager
         return hasChanged;
     }
     
+    /// <summary>
+    /// Checks if the player is not the host.
+    /// </summary>
+    /// <param name="avatar"></param>
+    /// <returns></returns>
     private static bool NotHost(PlayerAvatar avatar) => avatar.SteamId() != SyncUtil.HostSteamId;
     
+    /// <summary>
+    /// Checks if the upgrade should be synchronized based on its type.
+    /// </summary>
+    /// <param name="key"></param>
+    /// <returns></returns>
     private static bool ShouldSync(UpgradeId key) => key.Type switch
     {
-        UpgradeType.Health => _syncHealth?.Value ?? false,
-        UpgradeType.Stamina => _syncStamina?.Value ?? false,
-        UpgradeType.ExtraJump => _syncExtraJump?.Value ?? false,
-        UpgradeType.TumbleLaunch => _syncTumbleLaunch?.Value ?? false,
-        UpgradeType.MapPlayerCount => _syncMapPlayerCount?.Value ?? false,
-        UpgradeType.SprintSpeed => _syncSprintSpeed?.Value ?? false,
-        UpgradeType.GrabStrength => _syncGrabStrength?.Value ?? false,
-        UpgradeType.GrabRange => _syncGrabRange?.Value ?? false,
-        UpgradeType.GrabThrow => _syncGrabThrow?.Value ?? false,
-        _ or UpgradeType.Modded => _moddedUpgrades?.Value ?? false
+        UpgradeType.Health => _syncHealth.Value,
+        UpgradeType.Stamina => _syncStamina.Value,
+        UpgradeType.ExtraJump => _syncExtraJump.Value,
+        UpgradeType.TumbleLaunch => _syncTumbleLaunch.Value,
+        UpgradeType.MapPlayerCount => _syncMapPlayerCount.Value,
+        UpgradeType.SprintSpeed => _syncSprintSpeed.Value,
+        UpgradeType.GrabStrength => _syncGrabStrength.Value,
+        UpgradeType.GrabRange => _syncGrabRange.Value,
+        UpgradeType.GrabThrow => _syncGrabThrow.Value,
+        UpgradeType.TumbleWings => _syncTumbleWings.Value,
+        UpgradeType.CrouchRest => _syncCrouchRest.Value,
+        UpgradeType.Modded => _registeredModdedUpgrades.TryGetValue(key, out ConfigEntry<bool> value) && value.Value,
+        var _ => false
     };
 }

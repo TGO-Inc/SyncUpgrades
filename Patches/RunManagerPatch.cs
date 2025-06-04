@@ -7,7 +7,8 @@ namespace SyncUpgrades.Patches;
 internal class RunManagerPatch
 {
     [HarmonyPostfix]
-    [HarmonyPatch("ChangeLevel")]
+    [HarmonyWrapSafe]
+    [HarmonyPatch(nameof(ChangeLevel))]
     private static void ChangeLevel(bool _completedLevel, bool _levelFailed, bool ___restarting)
     {
         // If not host OR single-player, return

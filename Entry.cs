@@ -3,6 +3,7 @@ using BepInEx.Logging;
 using BepInEx;
 using HarmonyLib;
 using SyncUpgrades.Core;
+using SyncUpgrades.Core.Internal;
 using UnityEngine;
 
 namespace SyncUpgrades;
@@ -29,7 +30,7 @@ public class Entry : BaseUnityPlugin
         SyncManager.Init();
         
         // Apply Harmony patches
-        Harmony.PatchAll();
+        Harmony.PatchAllSafe();
         
         // Persist the game object
         this.gameObject.hideFlags = HideFlags.DontSaveInEditor;
