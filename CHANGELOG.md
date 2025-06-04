@@ -1,3 +1,7 @@
+# 2.1.1
+- Added support for TumbleWings and CrouchRest (Beta)
+- Ensures backwards compatibility with previous versions of REPO (non Beta)
+
 # 2.0.7
 - [x] Fixed modded upgrade synchronization (now works 100% for REPOLib registered upgrades)
 - [x] [Fixed client disconnect bug when duplicate networking operations are sent (removed duplicate networking)](#2)
