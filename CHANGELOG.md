@@ -1,3 +1,8 @@
+# 2.1.5
+- For modded upgrades registered with REPOLib:
+  - Added dynamic config options to disable modded upgrade synchronization
+  - Fixed a small sync bug with modded upgrades
+
 # 2.1.2
 - Added support for TumbleWings and CrouchRest (Beta)
 - Ensures backwards compatibility with previous versions of REPO (non Beta)
