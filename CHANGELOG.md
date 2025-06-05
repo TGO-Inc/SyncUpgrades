@@ -1,6 +1,7 @@
-# 2.1.1
+# 2.1.2
 - Added support for TumbleWings and CrouchRest (Beta)
 - Ensures backwards compatibility with previous versions of REPO (non Beta)
+- Fixed naming and description of config entries
 
 # 2.0.7
 - [x] Fixed modded upgrade synchronization (now works 100% for REPOLib registered upgrades)
