@@ -17,7 +17,7 @@ public enum UpgradeType
     SprintSpeed,
     GrabStrength,
     GrabRange,
-    GrabThrow,
+    ThrowStrength,
     TumbleWings,
     CrouchRest,
 }

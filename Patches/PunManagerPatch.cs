@@ -49,7 +49,7 @@ internal class PunManagerPatch
     [HarmonyWrapSafe]
     [HarmonyPatch(nameof(UpdateThrowStrengthRightAway), typeof(string))]
     private static void UpdateThrowStrengthRightAway(PunManager __instance, PhotonView ___photonView, StatsManager ___statsManager, string _steamID)
-        => UpgradeWrapper(__instance, ___photonView, ___statsManager, _steamID, SyncUtil.GrabThrowId);
+        => UpgradeWrapper(__instance, ___photonView, ___statsManager, _steamID, SyncUtil.ThrowStrengthId);
 
     // UpgradePlayerGrabRange
     [HarmonyPrefix]

@@ -25,7 +25,7 @@ public static class SyncUtil
     public static readonly UpgradeId SprintSpeedId    = new(UpgradeType.SprintSpeed);
     public static readonly UpgradeId GrabStrengthId   = new(UpgradeType.GrabStrength);
     public static readonly UpgradeId GrabRangeId      = new(UpgradeType.GrabRange);
-    public static readonly UpgradeId GrabThrowId      = new(UpgradeType.GrabThrow);
+    public static readonly UpgradeId ThrowStrengthId  = new(UpgradeType.ThrowStrength);
     public static readonly UpgradeId TumbleWingsId    = new(UpgradeType.TumbleWings);
     public static readonly UpgradeId CrouchRestId     = new(UpgradeType.CrouchRest);
     
@@ -95,7 +95,7 @@ public static class SyncUtil
         "Speed" => UpgradeType.SprintSpeed,
         "Strength" => UpgradeType.GrabStrength,
         "Range" => UpgradeType.GrabRange,
-        "Throw" => UpgradeType.GrabThrow,
+        "Throw" => UpgradeType.ThrowStrength,
         "TumbleWings" => UpgradeType.TumbleWings,
         "CrouchRest" => UpgradeType.CrouchRest,
         // Assume
@@ -118,7 +118,7 @@ public static class SyncUtil
         UpgradeType.SprintSpeed => "Speed",
         UpgradeType.GrabStrength => "Strength",
         UpgradeType.GrabRange => "Range",
-        UpgradeType.GrabThrow => "Throw",
+        UpgradeType.ThrowStrength => "Throw",
         UpgradeType.TumbleWings => "TumbleWings",
         UpgradeType.CrouchRest => "CrouchRest",
         UpgradeType.Modded => "Modded: Unknown",
@@ -142,7 +142,7 @@ public static class SyncUtil
         UpgradeType.SprintSpeed => stats.playerUpgradeSpeed,
         UpgradeType.GrabStrength => stats.playerUpgradeStrength,
         UpgradeType.GrabRange => stats.playerUpgradeRange,
-        UpgradeType.GrabThrow => stats.playerUpgradeThrow,
+        UpgradeType.ThrowStrength => stats.playerUpgradeThrow,
         UpgradeType.TumbleWings => stats.GetPlayerUpgradeTumbleWings(),
         UpgradeType.CrouchRest => stats.GetPlayerUpgradeCrouchRest(),
         UpgradeType.Modded => stats.dictionaryOfDictionaries[id.RawName],
@@ -165,7 +165,7 @@ public static class SyncUtil
         UpgradeType.SprintSpeed => "UpgradePlayerSprintSpeedRPC",
         UpgradeType.GrabStrength => "UpgradePlayerGrabStrengthRPC",
         UpgradeType.GrabRange => "UpgradePlayerGrabRangeRPC",
-        UpgradeType.GrabThrow => "UpgradePlayerThrowStrengthRPC",
+        UpgradeType.ThrowStrength => "UpgradePlayerThrowStrengthRPC",
         UpgradeType.TumbleWings => "UpgradePlayerTumbleWingsRPC",
         UpgradeType.CrouchRest => "UpgradePlayerCrouchRestRPC",
         _ or UpgradeType.Modded => throw new ArgumentException($"Invalid UpgradeType for {nameof(GetRPCFunctionName)}")
@@ -224,7 +224,7 @@ public static class SyncUtil
         UpgradeType.SprintSpeed => bundle.Manager.UpgradePlayerSprintSpeed(steamId),
         UpgradeType.GrabStrength => bundle.Manager.UpgradePlayerGrabStrength(steamId),
         UpgradeType.GrabRange => bundle.Manager.UpgradePlayerGrabRange(steamId),
-        UpgradeType.GrabThrow => bundle.Manager.UpgradePlayerThrowStrength(steamId),
+        UpgradeType.ThrowStrength => bundle.Manager.UpgradePlayerThrowStrength(steamId),
         UpgradeType.TumbleWings => bundle.Manager.UpgradePlayerTumbleWings(steamId),
         UpgradeType.CrouchRest => bundle.Manager.UpgradePlayerCrouchRest(steamId),
         UpgradeType.Modded => UpgradeModded(bundle, SemiFunc.PlayerAvatarGetFromSteamID(steamId), key, 1),
