@@ -78,7 +78,10 @@ public static class SyncUtil
     /// <param name="bundle"></param>
     /// <returns></returns>
     public static IEnumerable<UpgradeId> GetUpgradeTypes(SyncBundle bundle) 
-        => bundle.Stats.dictionaryOfDictionaries.Where(kvp => kvp.Key.StartsWith(PlayerUpgrade) || kvp.Key.StartsWith(AppliedPlayerUpgrade)).Select(UpgradeId.New);
+        => bundle.Stats.dictionaryOfDictionaries
+                 .Where(kvp => kvp.Key.StartsWith(PlayerUpgrade) || kvp.Key.StartsWith(AppliedPlayerUpgrade))
+                 .Select(UpgradeId.New)
+                 .Union(SyncManager.RegisteredModdedUpgrades.Keys);
 
     /// <summary>
     /// Converts a string key to an UpgradeType.

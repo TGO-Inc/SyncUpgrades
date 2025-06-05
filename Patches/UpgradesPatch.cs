@@ -1,3 +1,4 @@
+using System;
 using ExitGames.Client.Photon;
 using HarmonyLib;
 using REPOLib.Modules;
@@ -54,5 +55,23 @@ internal class UpgradesPatch
 
         string realId = SyncUtil.FixKey(upgradeId);
         SyncManager.PlayerConsumedUpgrade(steamId, UpgradeId.New(realId), level);
+    }
+    
+    [HarmonyPostfix]
+    [HarmonyWrapSafe]
+    [HarmonyPatch(nameof(RegisterUpgrade), typeof(string), typeof(Item), typeof(Action<PlayerAvatar, int>), typeof(Action<PlayerAvatar, int>))]
+    // ReSharper disable once InconsistentNaming
+    public static void RegisterUpgrade(PlayerUpgrade? __result)
+    {
+        // If not host OR single-player, return
+        if (SemiFunc.IsNotMasterClient() || __result is null)
+            return;
+        
+        #if DEBUG
+        Entry.LogSource.LogInfo($"[{nameof(RegisterUpgrade)}] [{__result.UpgradeId}]");
+        #endif
+        
+        // Register the upgrade
+        SyncManager.RegisterModdedUpgrade(__result);
     }
 }
