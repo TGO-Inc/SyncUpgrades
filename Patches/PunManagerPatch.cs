@@ -12,9 +12,18 @@ internal class PunManagerPatch
     // UpgradePlayerHealth
     [HarmonyPrefix]
     [HarmonyWrapSafe]
+    [IgnoreMethodPatchException]
     [HarmonyPatch(nameof(UpdateHealthRightAway), typeof(string))]
     private static void UpdateHealthRightAway(PunManager __instance, PhotonView ___photonView, StatsManager ___statsManager, string playerName)
         => UpgradeWrapper(__instance, ___photonView, ___statsManager, playerName, SyncUtil.HealthId);
+    
+    // UpgradePlayerHealth
+    [HarmonyPrefix]
+    [HarmonyWrapSafe]
+    [IgnoreMethodPatchException]
+    [HarmonyPatch(nameof(UpdateHealthRightAway), typeof(string))]
+    private static void UpdateHealthRightAwayBeta(PunManager __instance, PhotonView ___photonView, StatsManager ___statsManager, string _steamID)
+        => UpgradeWrapper(__instance, ___photonView, ___statsManager, _steamID, SyncUtil.HealthId);
     
     // UpgradePlayerEnergy
     [HarmonyPrefix]
@@ -75,7 +84,7 @@ internal class PunManagerPatch
     // UpgradePlayerTumbleWings
     [HarmonyPrefix]
     [HarmonyWrapSafe]
-    [IgnoreMethodNotFoundPatchException]
+    [IgnoreMethodPatchException]
     [HarmonyPatch(nameof(UpdateTumbleWingsRightAway), typeof(string))]
     private static void UpdateTumbleWingsRightAway(PunManager __instance, PhotonView ___photonView, StatsManager ___statsManager, string _steamID)
         => UpgradeWrapper(__instance, ___photonView, ___statsManager, _steamID, SyncUtil.TumbleWingsId);
@@ -83,7 +92,7 @@ internal class PunManagerPatch
     // UpgradeCrouchRest
     [HarmonyPrefix]
     [HarmonyWrapSafe]
-    [IgnoreMethodNotFoundPatchException]
+    [IgnoreMethodPatchException]
     [HarmonyPatch(nameof(UpdateCrouchRestRightAway), typeof(string))]
     private static void UpdateCrouchRestRightAway(PunManager __instance, PhotonView ___photonView, StatsManager ___statsManager, string _steamID)
         => UpgradeWrapper(__instance, ___photonView, ___statsManager, _steamID, SyncUtil.CrouchRestId);

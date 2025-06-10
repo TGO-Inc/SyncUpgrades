@@ -6,7 +6,7 @@ using HarmonyLib;
 
 namespace SyncUpgrades.Core.Internal;
 
-internal class IgnoreMethodNotFoundPatchExceptionAttribute : HarmonyAttribute;
+internal class IgnoreMethodPatchExceptionAttribute : HarmonyAttribute;
 
 internal static class HarmonyExtensions
 {
@@ -21,45 +21,54 @@ internal static class HarmonyExtensions
     public static void PatchAllSafe(this Harmony harmony)
     {
         var currentAssembly = Assembly.GetExecutingAssembly();
-        IEnumerable<Type> types = AccessTools.GetTypesFromAssembly(currentAssembly)
+        IEnumerable<Type> classes = AccessTools.GetTypesFromAssembly(currentAssembly)
                                              .Where(t => t.IsDefined<HarmonyPatch>() && t.IsClass);
-        foreach (Type? type in types)
+        foreach (Type? @class in classes)
         {
-            MethodInfo[] methods = type.GetMethods(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)
+            MethodInfo[] methods = @class.GetMethods(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)
                                        .Where(m => m.IsDefined<HarmonyPatch>())
                                        .ToArray();
             
             foreach (MethodInfo method in methods)
-                harmony.SafePatch(type, method);
+                harmony.SafePatch(@class, method);
         }
     }
     
-    private static void SafePatch(this Harmony harmony, Type type, MethodInfo method)
+    private static void SafePatch(this Harmony harmony, Type @class, MethodInfo method)
     {
         // get target class
-        Type targetType = type.GetCustomAttribute<HarmonyPatch>()?.info.declaringType
+        Type targetType = @class.GetCustomAttribute<HarmonyPatch>()?.info.declaringType
             ?? method.GetCustomAttribute<HarmonyPatch>()?.info.declaringType
-            ?? throw new InvalidOperationException("Could not find target type for Harmony patch.");
+            ?? throw new InvalidOperationException("Could not find target @class for Harmony patch.");
         
-        string methodName = type.GetCustomAttribute<HarmonyPatch>()?.info.methodName
+        string methodName = @class.GetCustomAttribute<HarmonyPatch>()?.info.methodName
             ?? method.GetCustomAttribute<HarmonyPatch>()?.info.methodName
             ?? throw new InvalidOperationException("Could not find target method name for Harmony patch.");
         
-        Type[]? parameterTypes = type.GetCustomAttribute<HarmonyPatch>()?.info.argumentTypes
+        Type[]? parameterTypes = @class.GetCustomAttribute<HarmonyPatch>()?.info.argumentTypes
             ?? method.GetCustomAttribute<HarmonyPatch>()?.info.argumentTypes
             ?? null;
         
         CallType callType = GetCallType(method);
         MethodInfo? targetMethod = AccessTools.Method(targetType, methodName, parameterTypes);
         
-        bool isSafePatch = method.IsDefined<IgnoreMethodNotFoundPatchExceptionAttribute>();
+        bool isSafePatch = method.IsDefined<IgnoreMethodPatchExceptionAttribute>();
         if (isSafePatch && targetMethod is null)
         {
-            Entry.LogSource.LogWarning($"Failed to patch method {method.Name} in type {type.FullName}");
+            Entry.LogSource.LogWarning($"[IgnoreMethodPatchException] [WARN] [NOFAIL] Failed to patch method {methodName} in {targetType.FullName}");
             return;
         }
-        
-        DoRawPatch(harmony, targetMethod, method, callType);
+
+        try
+        {
+            DoRawPatch(harmony, targetMethod, method, callType);
+        }
+        catch (Exception ex)
+        {
+            harmony.Unpatch(targetMethod, method);
+            if (!isSafePatch) throw new InvalidOperationException($"Failed to patch method {methodName} in {targetType.FullName}", ex);
+            Entry.LogSource.LogWarning($"[IgnoreMethodPatchException] [WARN] [NOFAIL] Failed to patch method {methodName} in {targetType.FullName}");
+        }
     }
 
     private static void DoRawPatch(Harmony harmony, MethodInfo targetMethod, MethodInfo method, CallType callType)

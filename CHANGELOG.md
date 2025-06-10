@@ -1,3 +1,6 @@
+# 2.1.6
+- Updated method patches for the latest beta version of REPO
+
 # 2.1.5
 - For modded upgrades registered with REPOLib:
   - Added dynamic config options to disable modded upgrade synchronization
