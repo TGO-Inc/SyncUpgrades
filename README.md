@@ -8,7 +8,7 @@
 - You may be familiar with [SharedUpgrades](https://thunderstore.io/c/repo/p/Traktool/SharedUpgrades/)
 or [SyncHostUpgrades](https://thunderstore.io/c/repo/p/SharkLucas/SyncHostUpgrades/)
 
-- This mod is a combination of both, and it is **not** buggy, **not** laggy, and **not** inefficient.
+- This mod is a combination of both, and it is **not** buggy, **not** laggy, **not** inefficient, and **not** partially implemented.
 
 - The code behind this mod only runs when a player consumes an upgrade, a player joins the game, or a level is loaded.
 
