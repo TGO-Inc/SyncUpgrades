@@ -14,15 +14,7 @@ internal class PunManagerPatch
     [HarmonyWrapSafe]
     [IgnoreMethodPatchException]
     [HarmonyPatch(nameof(UpdateHealthRightAway), typeof(string))]
-    private static void UpdateHealthRightAway(PunManager __instance, PhotonView ___photonView, StatsManager ___statsManager, string playerName)
-        => UpgradeWrapper(__instance, ___photonView, ___statsManager, playerName, SyncUtil.HealthId);
-    
-    // UpgradePlayerHealth
-    [HarmonyPrefix]
-    [HarmonyWrapSafe]
-    [IgnoreMethodPatchException]
-    [HarmonyPatch(nameof(UpdateHealthRightAway), typeof(string))]
-    private static void UpdateHealthRightAwayBeta(PunManager __instance, PhotonView ___photonView, StatsManager ___statsManager, string _steamID)
+    private static void UpdateHealthRightAway(PunManager __instance, PhotonView ___photonView, StatsManager ___statsManager, string _steamID)
         => UpgradeWrapper(__instance, ___photonView, ___statsManager, _steamID, SyncUtil.HealthId);
     
     // UpgradePlayerEnergy

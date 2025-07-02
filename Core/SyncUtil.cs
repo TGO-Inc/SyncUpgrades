@@ -81,7 +81,7 @@ public static class SyncUtil
         => bundle.Stats.dictionaryOfDictionaries
                  .Where(kvp => kvp.Key.StartsWith(PlayerUpgrade) || kvp.Key.StartsWith(AppliedPlayerUpgrade))
                  .Select(UpgradeId.New)
-                 .Union(SyncManager.RegisteredModdedUpgrades.Keys);
+                 .Union(SyncManager.registeredModdedUpgrades.Keys);
 
     /// <summary>
     /// Converts a string key to an UpgradeType.
@@ -146,8 +146,8 @@ public static class SyncUtil
         UpgradeType.GrabStrength => stats.playerUpgradeStrength,
         UpgradeType.GrabRange => stats.playerUpgradeRange,
         UpgradeType.ThrowStrength => stats.playerUpgradeThrow,
-        UpgradeType.TumbleWings => stats.GetPlayerUpgradeTumbleWings(),
-        UpgradeType.CrouchRest => stats.GetPlayerUpgradeCrouchRest(),
+        UpgradeType.TumbleWings => stats.playerUpgradeTumbleWings,
+        UpgradeType.CrouchRest => stats.playerUpgradeCrouchRest,
         UpgradeType.Modded => stats.dictionaryOfDictionaries[id.RawName],
         _ => throw new ArgumentException($"Invalid UpgradeType for {nameof(GetUpgrades)}")
     };

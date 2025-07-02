@@ -23,7 +23,7 @@ public static class SyncManager
     private static ConfigEntry<bool> _syncTumbleLaunch   = Entry.BepConfig.Bind(Section, "Tumble Launch", true, "Sync Tumble Launch");
     private static ConfigEntry<bool> _syncTumbleWings    = Entry.BepConfig.Bind(Section, "Tumble Wings", true, "Sync Tumble Wings");
     private static ConfigEntry<bool> _syncCrouchRest     = Entry.BepConfig.Bind(Section, "Crouch Rest", true, "Sync Crouch Rest");
-    internal static ConcurrentDictionary<UpgradeId, ConfigEntry<bool>> RegisteredModdedUpgrades = [];
+    internal static ConcurrentDictionary<UpgradeId, ConfigEntry<bool>> registeredModdedUpgrades = [];
 
     internal static void Init()
     {
@@ -41,14 +41,14 @@ public static class SyncManager
         var upgradeId = UpgradeId.New(rawName);
         
         // Skip if the upgrade is already registered
-        if (RegisteredModdedUpgrades.ContainsKey(upgradeId))
+        if (registeredModdedUpgrades.ContainsKey(upgradeId))
             return;
         
         #if DEBUG
         Entry.LogSource.LogInfo($"[{nameof(RegisterModdedUpgrade)}] {upgradeId.RawName}");
         #endif
         
-        RegisteredModdedUpgrades.TryAdd(upgradeId, 
+        registeredModdedUpgrades.TryAdd(upgradeId, 
             Entry.BepConfig.Bind(ModdedSection, SyncUtil.TrimKey(upgradeId.RawName), true, $"Sync {upgradeId.RawName}"));
     }
 
@@ -76,6 +76,10 @@ public static class SyncManager
         // Upgrade host if not host and return
         if (bundle.SteamId != SyncUtil.HostSteamId) 
         {
+            #if DEBUG
+            Entry.LogSource.LogInfo($"[{nameof(PlayerConsumedUpgrade)}] [{bundle.SteamId}] {upgrade} != {nameof(SyncHostToAll)}()");
+            #endif
+            
             if (newLevel > 0)
             {
                 // load the upgrade dictionary
@@ -95,6 +99,10 @@ public static class SyncManager
             SyncUtil.CallUpdateFunction(bundle, SyncUtil.HostSteamId, upgrade);
             return;
         }
+        
+        #if DEBUG
+        Entry.LogSource.LogInfo($"[{nameof(PlayerConsumedUpgrade)}] [{bundle.SteamId}] {upgrade} => {nameof(SyncHostToAll)}()");
+        #endif
         
         // Sync the upgrade to all clients
         SyncHostToAll(bundle);
@@ -127,9 +135,14 @@ public static class SyncManager
     /// <param name="bundle"></param>
     public static void SyncHostToAll(SyncBundle bundle)
     {
-        if (SemiFunc.PlayerGetAll()
-                    .Where(NotHost)
-                    .Aggregate(false, (current, player) => current || SyncHostToTarget(bundle, player)))
+        var players = SemiFunc.PlayerGetAll().Where(NotHost).ToArray();   
+        
+        #if DEBUG
+        Entry.LogSource.LogInfo($"[{nameof(SyncHostToAll)}] Syncing upgrades for all players: [ {string.Join(", ", players.Select(p => p.SteamId()))} ]");
+        #endif
+
+        bool[] results = players.Select(player => SyncHostToTarget(bundle, player)).ToArray();
+        if (results.Any())
             SyncUtil.SyncStatsDictionaryToAll(bundle);
     }
 
@@ -154,20 +167,16 @@ public static class SyncManager
         string sourceId = source.SteamId();
         string targetId = target.SteamId();
         
+        #if DEBUG
+        Entry.LogSource.LogInfo($"[{nameof(SyncFromSourceToTarget)}] [{sourceId}] [{targetId}]");
+        #endif
+        
         if (targetId == sourceId)
             return false;
-        
-        #if DEBUG
-        Entry.LogSource.LogInfo($"[{nameof(SyncFromSourceToTarget)}] [{targetId}]");
-        #endif
         
         var hasChanged = false;
         foreach (UpgradeId? upgradeId in SyncUtil.GetUpgradeTypes(bundle).Where(ShouldSync))
         {
-            #if DEBUG
-            Entry.LogSource.LogInfo($"[{nameof(SyncFromSourceToTarget)}] {upgradeId}");
-            #endif
-            
             // load the upgrade dictionary
             Dictionary<string, int> upgradeDictionary = SyncUtil.GetUpgrades(bundle.Stats, upgradeId);
             
@@ -196,6 +205,7 @@ public static class SyncManager
                 $"[{nameof(SyncFromSourceToTarget)}] Synchronized upgrade for player {targetId}: {upgradeId.RawName} ({upgradeId.Type}), from {targetLevel} to {sourceLevel}");
         }
         
+        Entry.LogSource.LogInfo("EXIT EXIT EXIT");
         return hasChanged;
     }
     
@@ -224,7 +234,7 @@ public static class SyncManager
         UpgradeType.ThrowStrength => _syncThrowStrength.Value,
         UpgradeType.TumbleWings => _syncTumbleWings.Value,
         UpgradeType.CrouchRest => _syncCrouchRest.Value,
-        UpgradeType.Modded => RegisteredModdedUpgrades.TryGetValue(key, out ConfigEntry<bool> value) && value.Value,
+        UpgradeType.Modded => registeredModdedUpgrades.TryGetValue(key, out ConfigEntry<bool> value) && value.Value,
         var _ => false
     };
 }

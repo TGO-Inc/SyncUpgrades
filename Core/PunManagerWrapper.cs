@@ -12,10 +12,10 @@ public class PunManagerWrapper(PunManager manager)
         => manager.GetView();
 
     public int UpgradePlayerTumbleWings(string steamId)
-        => Beta.UpgradePlayerTumbleWings(manager, steamId);
+        => manager.UpgradePlayerTumbleWings(steamId);
     
     public int UpgradePlayerCrouchRest(string steamId)
-        => Beta.UpgradePlayerCrouchRest(manager, steamId);
+        => manager.UpgradePlayerCrouchRest(steamId);
 
     public void SyncAllDictionaries()
         => manager.SyncAllDictionaries();
