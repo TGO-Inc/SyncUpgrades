@@ -3,7 +3,7 @@ using SyncUpgrades.Core;
 
 namespace SyncUpgrades.Patches;
 
-[HarmonyPatch(typeof(RunManager))]
+// [HarmonyPatch(typeof(RunManager))]
 internal class RunManagerPatch
 {
     [HarmonyPostfix]
@@ -20,6 +20,6 @@ internal class RunManagerPatch
         #endif
         
         // Sync the upgrades
-        SyncManager.SyncHostToAll();
+        // SyncManager.SyncHostToAll();
     }
 }

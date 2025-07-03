@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using JetBrains.Annotations;
+using SyncUpgrades.Core.Internal;
 
 namespace SyncUpgrades.Core;
 

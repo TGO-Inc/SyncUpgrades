@@ -3,7 +3,7 @@ using SyncUpgrades.Core;
 
 namespace SyncUpgrades.Patches;
 
-[HarmonyPatch(typeof(StatsManager))]
+// [HarmonyPatch(typeof(StatsManager))]
 internal class StatsManagerPatch
 {
     [HarmonyPostfix]
@@ -20,6 +20,6 @@ internal class StatsManagerPatch
         #endif
         
         // Sync the upgrades
-        SyncManager.SyncHostToTarget(_steamID);
+        // SyncManager.SyncHostToTarget(_steamID);
     }
 }

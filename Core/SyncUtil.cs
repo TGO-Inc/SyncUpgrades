@@ -3,8 +3,6 @@ using Photon.Pun;
 using Photon.Realtime;
 using System.Collections.Generic;
 using System;
-using System.Collections.Concurrent;
-using System.Linq;
 using REPOLib.Modules;
 using SyncUpgrades.Core.Internal;
 
@@ -28,8 +26,6 @@ public static class SyncUtil
     public static readonly UpgradeId ThrowStrengthId  = new(UpgradeType.ThrowStrength);
     public static readonly UpgradeId TumbleWingsId    = new(UpgradeType.TumbleWings);
     public static readonly UpgradeId CrouchRestId     = new(UpgradeType.CrouchRest);
-    
-    private static readonly ConcurrentQueue<ISyncRequest> SyncQueue = [];
     
     /// <summary>
     /// Get the local player steam ID.
@@ -72,16 +68,16 @@ public static class SyncUtil
     /// <returns></returns>
     public static PlayerAvatar GetPlayer(string targetSteamId) => SemiFunc.PlayerAvatarGetFromSteamID(targetSteamId);
     
-    /// <summary>
-    /// Retrieves all the valid upgrade types.
-    /// </summary>
-    /// <param name="bundle"></param>
-    /// <returns></returns>
-    public static IEnumerable<UpgradeId> GetUpgradeTypes(SyncBundle bundle) 
-        => bundle.Stats.dictionaryOfDictionaries
-                 .Where(kvp => kvp.Key.StartsWith(PlayerUpgrade) || kvp.Key.StartsWith(AppliedPlayerUpgrade))
-                 .Select(UpgradeId.New)
-                 .Union(SyncManager.registeredModdedUpgrades.Keys);
+    // /// <summary>
+    // /// Retrieves all the valid upgrade types.
+    // /// </summary>
+    // /// <param name="bundle"></param>
+    // /// <returns></returns>
+    // public static IEnumerable<UpgradeId> GetUpgradeTypes(SyncBundle bundle) 
+    //     => bundle.Stats.dictionaryOfDictionaries
+    //              .Where(kvp => kvp.Key.StartsWith(PlayerUpgrade) || kvp.Key.StartsWith(AppliedPlayerUpgrade))
+    //              .Select(UpgradeId.New)
+    //              .Union(SyncManager.registeredModdedUpgrades.Keys);
 
     /// <summary>
     /// Converts a string key to an UpgradeType.
@@ -174,65 +170,65 @@ public static class SyncUtil
         _ or UpgradeType.Modded => throw new ArgumentException($"Invalid UpgradeType for {nameof(GetRPCFunctionName)}")
     };
 
-    /// <summary>
-    /// Call the RPC for a specific player.
-    /// </summary>
-    /// <param name="bundle"></param>
-    /// <param name="workingPlayer"></param>
-    /// <param name="key"></param>
-    public static void CallRPCOnePlayer(SyncBundle bundle, PlayerAvatar workingPlayer, UpgradeId key)
-        => CallRPCOnePlayer(bundle, workingPlayer.SteamId(), key, workingPlayer.photonView.Owner);
+    // /// <summary>
+    // /// Call the RPC for a specific player.
+    // /// </summary>
+    // /// <param name="bundle"></param>
+    // /// <param name="workingPlayer"></param>
+    // /// <param name="key"></param>
+    // public static void CallRPCOnePlayer(SyncBundle bundle, PlayerAvatar workingPlayer, UpgradeId key)
+    //     => CallRPCOnePlayer(bundle, workingPlayer.SteamId(), key, workingPlayer.photonView.Owner);
+    //
+    // /// <summary>
+    // /// Call the RPC for a specific player.
+    // /// </summary>
+    // /// <param name="bundle"></param>
+    // /// <param name="steamId"></param>
+    // /// <param name="key"></param>
+    // /// <param name="player"></param>
+    // public static void CallRPCOnePlayer(SyncBundle bundle, string steamId, UpgradeId key, Player player)
+    //     => bundle.View.LogRPC(GetRPCFunctionName(key.Type), player, steamId, ++GetUpgrades(bundle.Stats, key)[steamId]);
+    //
+    // /// <summary>
+    // /// Call the RPC for <see cref="Others"/>
+    // /// </summary>
+    // /// <param name="bundle"></param>
+    // /// <param name="steamId"></param>
+    // /// <param name="key"></param>
+    // public static void CallRPC(SyncBundle bundle, string steamId, UpgradeId key)
+    //     => bundle.View.LogRPC(GetRPCFunctionName(key.Type), Others, steamId, ++GetUpgrades(bundle.Stats, key)[steamId]);
+    //
+    // /// <summary>
+    // /// Synchronize the stats dictionary to all players.
+    // /// </summary>
+    // /// <param name="bundle"></param>
+    // public static void SyncStatsDictionaryToAll(SyncBundle bundle)
+    //     => SyncQueue.Enqueue(SyncRequest.New(bundle));
 
-    /// <summary>
-    /// Call the RPC for a specific player.
-    /// </summary>
-    /// <param name="bundle"></param>
-    /// <param name="steamId"></param>
-    /// <param name="key"></param>
-    /// <param name="player"></param>
-    public static void CallRPCOnePlayer(SyncBundle bundle, string steamId, UpgradeId key, Player player)
-        => bundle.View.LogRPC(GetRPCFunctionName(key.Type), player, steamId, ++GetUpgrades(bundle.Stats, key)[steamId]);
-
-    /// <summary>
-    /// Call the RPC for <see cref="Others"/>
-    /// </summary>
-    /// <param name="bundle"></param>
-    /// <param name="steamId"></param>
-    /// <param name="key"></param>
-    public static void CallRPC(SyncBundle bundle, string steamId, UpgradeId key)
-        => bundle.View.LogRPC(GetRPCFunctionName(key.Type), Others, steamId, ++GetUpgrades(bundle.Stats, key)[steamId]);
-
-    /// <summary>
-    /// Synchronize the stats dictionary to all players.
-    /// </summary>
-    /// <param name="bundle"></param>
-    public static void SyncStatsDictionaryToAll(SyncBundle bundle)
-        => SyncQueue.Enqueue(SyncRequest.New(bundle));
-
-    /// <summary>
-    /// Call the update function for a specific upgrade type.
-    /// </summary>
-    /// <param name="bundle"></param>
-    /// <param name="steamId"></param>
-    /// <param name="key"></param>
-    /// <returns></returns>
-    /// <exception cref="ArgumentException"></exception>
-    public static int CallUpdateFunction(SyncBundle bundle, string steamId, UpgradeId key) => key.Type switch
-    {
-        UpgradeType.Health => bundle.Manager.UpgradePlayerHealth(steamId),
-        UpgradeType.Stamina => bundle.Manager.UpgradePlayerEnergy(steamId),
-        UpgradeType.ExtraJump => bundle.Manager.UpgradePlayerExtraJump(steamId),
-        UpgradeType.TumbleLaunch => bundle.Manager.UpgradePlayerTumbleLaunch(steamId),
-        UpgradeType.MapPlayerCount => bundle.Manager.UpgradeMapPlayerCount(steamId),
-        UpgradeType.SprintSpeed => bundle.Manager.UpgradePlayerSprintSpeed(steamId),
-        UpgradeType.GrabStrength => bundle.Manager.UpgradePlayerGrabStrength(steamId),
-        UpgradeType.GrabRange => bundle.Manager.UpgradePlayerGrabRange(steamId),
-        UpgradeType.ThrowStrength => bundle.Manager.UpgradePlayerThrowStrength(steamId),
-        UpgradeType.TumbleWings => bundle.Manager.UpgradePlayerTumbleWings(steamId),
-        UpgradeType.CrouchRest => bundle.Manager.UpgradePlayerCrouchRest(steamId),
-        UpgradeType.Modded => UpgradeModded(bundle, SemiFunc.PlayerAvatarGetFromSteamID(steamId), key, 1),
-        _ => throw new ArgumentException($"Invalid UpgradeType for {nameof(CallUpdateFunction)}")
-    };
+    // /// <summary>
+    // /// Call the update function for a specific upgrade type.
+    // /// </summary>
+    // /// <param name="bundle"></param>
+    // /// <param name="steamId"></param>
+    // /// <param name="key"></param>
+    // /// <returns></returns>
+    // /// <exception cref="ArgumentException"></exception>
+    // public static int CallUpdateFunction(SyncBundle bundle, string steamId, UpgradeId key) => key.Type switch
+    // {
+    //     UpgradeType.Health => bundle.Manager.UpgradePlayerHealth(steamId),
+    //     UpgradeType.Stamina => bundle.Manager.UpgradePlayerEnergy(steamId),
+    //     UpgradeType.ExtraJump => bundle.Manager.UpgradePlayerExtraJump(steamId),
+    //     UpgradeType.TumbleLaunch => bundle.Manager.UpgradePlayerTumbleLaunch(steamId),
+    //     UpgradeType.MapPlayerCount => bundle.Manager.UpgradeMapPlayerCount(steamId),
+    //     UpgradeType.SprintSpeed => bundle.Manager.UpgradePlayerSprintSpeed(steamId),
+    //     UpgradeType.GrabStrength => bundle.Manager.UpgradePlayerGrabStrength(steamId),
+    //     UpgradeType.GrabRange => bundle.Manager.UpgradePlayerGrabRange(steamId),
+    //     UpgradeType.ThrowStrength => bundle.Manager.UpgradePlayerThrowStrength(steamId),
+    //     UpgradeType.TumbleWings => bundle.Manager.UpgradePlayerTumbleWings(steamId),
+    //     UpgradeType.CrouchRest => bundle.Manager.UpgradePlayerCrouchRest(steamId),
+    //     UpgradeType.Modded => UpgradeModded(bundle, SemiFunc.PlayerAvatarGetFromSteamID(steamId), key, 1),
+    //     _ => throw new ArgumentException($"Invalid UpgradeType for {nameof(CallUpdateFunction)}")
+    // };
     
     /// <summary>
     /// Upgrade a modded upgrade for a specific player.
@@ -242,22 +238,22 @@ public static class SyncUtil
     /// <param name="key"></param>
     /// <param name="amount"></param>
     /// <returns></returns>
-    public static int UpgradeModded(SyncBundle bundle, PlayerAvatar workingPlayer, UpgradeId key, int amount)
+    public static int UpgradeModded(PlayerAvatar workingPlayer, UpgradeId key, int amount)
     {
         string steamId = workingPlayer.SteamId();
-        int newAmt = AddToStatsDictionary(bundle, steamId, key, amount);
+        int newAmt = AddToStatsDictionary(steamId, key, amount);
 
         if (Upgrades.TryGetUpgrade(TrimKey(key.RawName), out PlayerUpgrade? upgrade))
         {
             #if DEBUG
-            Entry.LogSource.LogInfo($"[NETWORKING] [{nameof(UpgradeModded)}] [{bundle}] {upgrade.UpgradeId} {steamId} {newAmt}");
+            Entry.LogSource.LogInfo($"[NETWORKING] [{nameof(UpgradeModded)}] {upgrade.UpgradeId} {steamId} {newAmt}");
             #endif
             upgrade.SetLevel(workingPlayer, newAmt);
         }
         else
         {
             #if DEBUG
-            Entry.LogSource.LogError($"[{nameof(UpgradeModded)}] [{bundle}] Upgrade not found in {nameof(REPOLib)}: {key.RawName}");
+            Entry.LogSource.LogError($"[{nameof(UpgradeModded)}] Upgrade not found in {nameof(REPOLib)}: {key.RawName}");
             #endif
         }
         
@@ -272,30 +268,12 @@ public static class SyncUtil
     /// <param name="key"></param>
     /// <param name="amount"></param>
     /// <returns></returns>
-    public static int AddToStatsDictionary(SyncBundle bundle, string steamId, UpgradeId key, int amount)
+    public static int AddToStatsDictionary(string steamId, UpgradeId key, int amount)
     {
         #if DEBUG
-        Entry.LogSource.LogInfo($"[{nameof(AddToStatsDictionary)}] [{bundle}] {key} {steamId} {amount}");
+        Entry.LogSource.LogInfo($"[{nameof(AddToStatsDictionary)}] {key} {steamId} {amount}");
         #endif
-        return bundle.Stats.dictionaryOfDictionaries[key.RawName][steamId] += amount;
-    }
-    
-    /// <summary>
-    /// Queue an RPC call to be executed later.
-    /// </summary>
-    /// <param name="view"></param>
-    /// <param name="methodName"></param>
-    /// <param name="target"></param>
-    /// <param name="parameters"></param>
-    internal static void QueueRPC(PhotonView view, string methodName, object target, object[] parameters)
-        => SyncQueue.Enqueue(PunRequest.New(view, methodName, target, parameters));
-
-    /// <summary>
-    /// Execute one RPC call from the queue.
-    /// </summary>
-    internal static void RunOneRPC()
-    {
-        if (SyncQueue.TryDequeue(out ISyncRequest request))
-            request.Run();
+        // return bundle.Stats.dictionaryOfDictionaries[key.RawName][steamId] += amount;
+        return amount;
     }
 }

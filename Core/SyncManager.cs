@@ -4,6 +4,7 @@ using System.Linq;
 using BepInEx.Configuration;
 using JetBrains.Annotations;
 using REPOLib.Modules;
+using SyncUpgrades.Core.Internal;
 
 namespace SyncUpgrades.Core;
 
@@ -59,7 +60,7 @@ public static class SyncManager
     /// <param name="upgrade"></param>
     /// <param name="newLevel"></param>
     public static void PlayerConsumedUpgrade(string steamId, UpgradeId upgrade, int newLevel) 
-        => PlayerConsumedUpgrade(SyncBundle.Default(steamId), upgrade, newLevel);
+        => PlayerConsumedUpgrade( upgrade, newLevel);
     
     /// <summary>
     /// <inheritdoc cref="PlayerConsumedUpgrade(string, UpgradeId, int)"/>
@@ -67,146 +68,9 @@ public static class SyncManager
     /// <param name="bundle"></param>
     /// <param name="upgrade"></param>
     /// <param name="newLevel"></param>
-    public static void PlayerConsumedUpgrade(SyncBundle bundle, UpgradeId upgrade, int newLevel = 0)
+    public static void PlayerConsumedUpgrade(UpgradeId upgrade, int newLevel = 0)
     {
-        // If synchronization is enabled
-        if (!ShouldSync(upgrade))
-            return;
         
-        // Upgrade host if not host and return
-        if (bundle.SteamId != SyncUtil.HostSteamId) 
-        {
-            #if DEBUG
-            Entry.LogSource.LogInfo($"[{nameof(PlayerConsumedUpgrade)}] [{bundle.SteamId}] {upgrade} != {nameof(SyncHostToAll)}()");
-            #endif
-            
-            if (newLevel > 0)
-            {
-                // load the upgrade dictionary
-                Dictionary<string, int> upgradeDictionary = SyncUtil.GetUpgrades(bundle.Stats, upgrade);
-            
-                // get level difference
-                int targetLevel = upgradeDictionary.GetValueOrDefault(SyncUtil.HostSteamId, 0);
-                int difference = newLevel - targetLevel;
-                
-                // Upgrade the host
-                for (var i = 0; i < difference; i++)
-                    SyncUtil.CallUpdateFunction(bundle, SyncUtil.HostSteamId, upgrade);
-
-                return;
-            }
-            
-            SyncUtil.CallUpdateFunction(bundle, SyncUtil.HostSteamId, upgrade);
-            return;
-        }
-        
-        #if DEBUG
-        Entry.LogSource.LogInfo($"[{nameof(PlayerConsumedUpgrade)}] [{bundle.SteamId}] {upgrade} => {nameof(SyncHostToAll)}()");
-        #endif
-        
-        // Sync the upgrade to all clients
-        SyncHostToAll(bundle);
-    }
-    
-    /// <summary>
-    /// Synchronizes the host's upgrades to the target player.
-    /// </summary>
-    /// <param name="targetSteamId"></param>
-    /// <returns></returns>
-    public static bool SyncHostToTarget(string targetSteamId)
-    {
-        SyncBundle bundle = SyncBundle.Default(targetSteamId);
-        if (!SyncHostToTarget(bundle, SyncUtil.GetPlayer(targetSteamId)))
-            return false;
-        
-        SyncUtil.SyncStatsDictionaryToAll(bundle);
-        return true;
-    }
-
-    /// <summary>
-    /// Synchronizes the host's upgrades to all players.
-    /// </summary>
-    public static void SyncHostToAll() 
-        => SyncHostToAll(SyncBundle.Default(SyncUtil.HostSteamId));
-
-    /// <summary>
-    /// <inheritdoc cref="SyncHostToAll()"/>
-    /// </summary>
-    /// <param name="bundle"></param>
-    public static void SyncHostToAll(SyncBundle bundle)
-    {
-        var players = SemiFunc.PlayerGetAll().Where(NotHost).ToArray();   
-        
-        #if DEBUG
-        Entry.LogSource.LogInfo($"[{nameof(SyncHostToAll)}] Syncing upgrades for all players: [ {string.Join(", ", players.Select(p => p.SteamId()))} ]");
-        #endif
-
-        bool[] results = players.Select(player => SyncHostToTarget(bundle, player)).ToArray();
-        if (results.Any())
-            SyncUtil.SyncStatsDictionaryToAll(bundle);
-    }
-
-    /// <summary>
-    /// Synchronizes the host's upgrades to the target player.
-    /// </summary>
-    /// <param name="bundle"></param>
-    /// <param name="target"></param>
-    /// <returns>true if any changes were made. else false</returns>
-    private static bool SyncHostToTarget(SyncBundle bundle, PlayerAvatar target)
-        => SyncFromSourceToTarget(bundle, SyncUtil.Local, target);
-    
-    /// <summary>
-    /// Synchronizes the source player's upgrades to the target player.
-    /// </summary>
-    /// <param name="bundle"></param>
-    /// <param name="source"></param>
-    /// <param name="target"></param>
-    /// <returns></returns>
-    private static bool SyncFromSourceToTarget(SyncBundle bundle, PlayerAvatar source, PlayerAvatar target)
-    {
-        string sourceId = source.SteamId();
-        string targetId = target.SteamId();
-        
-        #if DEBUG
-        Entry.LogSource.LogInfo($"[{nameof(SyncFromSourceToTarget)}] [{sourceId}] [{targetId}]");
-        #endif
-        
-        if (targetId == sourceId)
-            return false;
-        
-        var hasChanged = false;
-        foreach (UpgradeId? upgradeId in SyncUtil.GetUpgradeTypes(bundle).Where(ShouldSync))
-        {
-            // load the upgrade dictionary
-            Dictionary<string, int> upgradeDictionary = SyncUtil.GetUpgrades(bundle.Stats, upgradeId);
-            
-            // get levels
-            int targetLevel = upgradeDictionary.GetValueOrDefault(targetId, 0);
-            int sourceLevel = upgradeDictionary.GetValueOrDefault(sourceId, 0);
-            
-            // If the source's level is higher than the target's
-            if (sourceLevel <= targetLevel)
-                continue;
-            
-            // Calculate the difference
-            int diff = sourceLevel - targetLevel;
-            if (!(hasChanged |= diff > 0))
-                continue;
-
-            // Call the corresponding upgrade method based on the upgrade type
-            if (upgradeId.Type != UpgradeType.Modded)
-                for (var i = 0; i < diff; i++)
-                    SyncUtil.CallRPCOnePlayer(bundle, target, upgradeId);
-            else
-                SyncUtil.UpgradeModded(bundle, target, upgradeId, diff);
-
-            // Log the synchronization
-            Entry.LogSource.LogInfo(
-                $"[{nameof(SyncFromSourceToTarget)}] Synchronized upgrade for player {targetId}: {upgradeId.RawName} ({upgradeId.Type}), from {targetLevel} to {sourceLevel}");
-        }
-        
-        Entry.LogSource.LogInfo("EXIT EXIT EXIT");
-        return hasChanged;
     }
     
     /// <summary>

@@ -13,7 +13,7 @@ namespace SyncUpgrades;
 public class Entry : BaseUnityPlugin
 {
     private const string PluginName = "Sync Upgrades";
-    private const string PluginVersion = "2.1.6";
+    private const string PluginVersion = "3.0.0";
     private const string PluginId = "TGO.SyncUpgrades";
 
     private static readonly Harmony Harmony = new(PluginId);
@@ -23,6 +23,8 @@ public class Entry : BaseUnityPlugin
     
     private void Awake()
     {
+        return;
+        
         // Initialize the plugin
         _instance = this;
         
@@ -37,10 +39,5 @@ public class Entry : BaseUnityPlugin
         
         // Log startup
         LogSource.LogInfo("Sync Upgrades loaded!");
-    }
-
-    private void FixedUpdate()
-    {
-        SyncUtil.RunOneRPC();
     }
 }
