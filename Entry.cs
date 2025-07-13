@@ -13,7 +13,7 @@ namespace SyncUpgrades;
 public class Entry : BaseUnityPlugin
 {
     private const string PluginName = "Sync Upgrades";
-    private const string PluginVersion = "2.1.6";
+    private const string PluginVersion = "2.2.4";
     private const string PluginId = "TGO.SyncUpgrades";
 
     private static readonly Harmony Harmony = new(PluginId);

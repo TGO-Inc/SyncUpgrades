@@ -6,7 +6,8 @@ using SyncUpgrades.Core.Internal;
 
 namespace SyncUpgrades.Patches;
 
-[HarmonyPatch(typeof(PunManager))]
+// Disable PunManagerPatch
+// [HarmonyPatch(typeof(PunManager))]
 internal class PunManagerPatch
 {
     // UpgradePlayerHealth

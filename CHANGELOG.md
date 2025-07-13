@@ -1,3 +1,6 @@
+# 2.2.4
+- Removed RPC and reduced network operations
+
 # 2.1.6
 - Updated method patches for the latest beta version of REPO
 

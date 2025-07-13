@@ -17,14 +17,14 @@ internal record PunRequest(PhotonView View, string MethodName, object Target, ob
             Entry.LogSource.LogInfo($"[NETWORKING] [{nameof(this.Run)}] [{nameof(this.View)}] [{this.MethodName}] To: [{this.Target}], {this.View.ViewID}, {this.View.OwnerActorNr}, {this.View.Owner}");
         #endif
 
-        switch (this.Target)
-        {
-            case RpcTarget rpcTarget:
-                this.View.RPC(this.MethodName, rpcTarget, this.Parameters);
-                break;
-            case Player player:
-                this.View.RPC(this.MethodName, player, this.Parameters);
-                break;
-        }
+        // switch (this.Target)
+        // {
+        //     case RpcTarget rpcTarget:
+        //         this.View.RPC(this.MethodName, rpcTarget, this.Parameters);
+        //         break;
+        //     case Player player:
+        //         this.View.RPC(this.MethodName, player, this.Parameters);
+        //         break;
+        // }
     }
 }

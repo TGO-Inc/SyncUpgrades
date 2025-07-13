@@ -195,8 +195,9 @@ public static class SyncManager
 
             // Call the corresponding upgrade method based on the upgrade type
             if (upgradeId.Type != UpgradeType.Modded)
-                for (var i = 0; i < diff; i++)
-                    SyncUtil.CallRPCOnePlayer(bundle, target, upgradeId);
+                SyncUtil.AddToStatsDictionary(bundle, targetId, upgradeId, diff);
+                // for (var i = 0; i < diff; i++)
+                //     SyncUtil.CallRPCOnePlayer(bundle, target, upgradeId);
             else
                 SyncUtil.UpgradeModded(bundle, target, upgradeId, diff);
 
@@ -205,7 +206,6 @@ public static class SyncManager
                 $"[{nameof(SyncFromSourceToTarget)}] Synchronized upgrade for player {targetId}: {upgradeId.RawName} ({upgradeId.Type}), from {targetLevel} to {sourceLevel}");
         }
         
-        Entry.LogSource.LogInfo("EXIT EXIT EXIT");
         return hasChanged;
     }
     

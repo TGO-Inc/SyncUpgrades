@@ -158,21 +158,21 @@ public static class SyncUtil
     /// <param name="key"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentException"></exception>
-    public static string GetRPCFunctionName(UpgradeType key) => key switch
-    {
-        UpgradeType.Health => "UpgradePlayerHealthRPC",
-        UpgradeType.Stamina => "UpgradePlayerEnergyRPC",
-        UpgradeType.ExtraJump => "UpgradePlayerExtraJumpRPC",
-        UpgradeType.TumbleLaunch => "UpgradePlayerTumbleLaunchRPC",
-        UpgradeType.MapPlayerCount => "UpgradeMapPlayerCountRPC",
-        UpgradeType.SprintSpeed => "UpgradePlayerSprintSpeedRPC",
-        UpgradeType.GrabStrength => "UpgradePlayerGrabStrengthRPC",
-        UpgradeType.GrabRange => "UpgradePlayerGrabRangeRPC",
-        UpgradeType.ThrowStrength => "UpgradePlayerThrowStrengthRPC",
-        UpgradeType.TumbleWings => "UpgradePlayerTumbleWingsRPC",
-        UpgradeType.CrouchRest => "UpgradePlayerCrouchRestRPC",
-        _ or UpgradeType.Modded => throw new ArgumentException($"Invalid UpgradeType for {nameof(GetRPCFunctionName)}")
-    };
+    // public static string GetRPCFunctionName(UpgradeType key) => key switch
+    // {
+    //     UpgradeType.Health => "UpgradePlayerHealthRPC",
+    //     UpgradeType.Stamina => "UpgradePlayerEnergyRPC",
+    //     UpgradeType.ExtraJump => "UpgradePlayerExtraJumpRPC",
+    //     UpgradeType.TumbleLaunch => "UpgradePlayerTumbleLaunchRPC",
+    //     UpgradeType.MapPlayerCount => "UpgradeMapPlayerCountRPC",
+    //     UpgradeType.SprintSpeed => "UpgradePlayerSprintSpeedRPC",
+    //     UpgradeType.GrabStrength => "UpgradePlayerGrabStrengthRPC",
+    //     UpgradeType.GrabRange => "UpgradePlayerGrabRangeRPC",
+    //     UpgradeType.ThrowStrength => "UpgradePlayerThrowStrengthRPC",
+    //     UpgradeType.TumbleWings => "UpgradePlayerTumbleWingsRPC",
+    //     UpgradeType.CrouchRest => "UpgradePlayerCrouchRestRPC",
+    //     _ or UpgradeType.Modded => throw new ArgumentException($"Invalid UpgradeType for {nameof(GetRPCFunctionName)}")
+    // };
 
     /// <summary>
     /// Call the RPC for a specific player.
@@ -180,8 +180,8 @@ public static class SyncUtil
     /// <param name="bundle"></param>
     /// <param name="workingPlayer"></param>
     /// <param name="key"></param>
-    public static void CallRPCOnePlayer(SyncBundle bundle, PlayerAvatar workingPlayer, UpgradeId key)
-        => CallRPCOnePlayer(bundle, workingPlayer.SteamId(), key, workingPlayer.photonView.Owner);
+    // public static void CallRPCOnePlayer(SyncBundle bundle, PlayerAvatar workingPlayer, UpgradeId key)
+    //     => CallRPCOnePlayer(bundle, workingPlayer.SteamId(), key, workingPlayer.photonView.Owner);
 
     /// <summary>
     /// Call the RPC for a specific player.
@@ -190,8 +190,8 @@ public static class SyncUtil
     /// <param name="steamId"></param>
     /// <param name="key"></param>
     /// <param name="player"></param>
-    public static void CallRPCOnePlayer(SyncBundle bundle, string steamId, UpgradeId key, Player player)
-        => bundle.View.LogRPC(GetRPCFunctionName(key.Type), player, steamId, ++GetUpgrades(bundle.Stats, key)[steamId]);
+    // public static void CallRPCOnePlayer(SyncBundle bundle, string steamId, UpgradeId key, Player player)
+    //     => bundle.View.LogRPC(GetRPCFunctionName(key.Type), player, steamId, ++GetUpgrades(bundle.Stats, key)[steamId]);
 
     /// <summary>
     /// Call the RPC for <see cref="Others"/>
@@ -199,8 +199,8 @@ public static class SyncUtil
     /// <param name="bundle"></param>
     /// <param name="steamId"></param>
     /// <param name="key"></param>
-    public static void CallRPC(SyncBundle bundle, string steamId, UpgradeId key)
-        => bundle.View.LogRPC(GetRPCFunctionName(key.Type), Others, steamId, ++GetUpgrades(bundle.Stats, key)[steamId]);
+    // public static void CallRPC(SyncBundle bundle, string steamId, UpgradeId key)
+    //     => bundle.View.LogRPC(GetRPCFunctionName(key.Type), Others, steamId, ++GetUpgrades(bundle.Stats, key)[steamId]);
 
     /// <summary>
     /// Synchronize the stats dictionary to all players.
@@ -265,19 +265,19 @@ public static class SyncUtil
     }
     
     /// <summary>
-    /// Add <see cref="amount"/> of levels to the stats dictionary for a specific player.
+    /// Add <see cref="incrementAmount"/> of levels to the stats dictionary for a specific player.
     /// </summary>
     /// <param name="bundle"></param>
     /// <param name="steamId"></param>
     /// <param name="key"></param>
-    /// <param name="amount"></param>
+    /// <param name="incrementAmount"></param>
     /// <returns></returns>
-    public static int AddToStatsDictionary(SyncBundle bundle, string steamId, UpgradeId key, int amount)
+    public static int AddToStatsDictionary(SyncBundle bundle, string steamId, UpgradeId key, int incrementAmount)
     {
         #if DEBUG
-        Entry.LogSource.LogInfo($"[{nameof(AddToStatsDictionary)}] [{bundle}] {key} {steamId} {amount}");
+        Entry.LogSource.LogInfo($"[{nameof(AddToStatsDictionary)}] [{bundle}] {key} {steamId} {incrementAmount}");
         #endif
-        return bundle.Stats.dictionaryOfDictionaries[key.RawName][steamId] += amount;
+        return bundle.Stats.dictionaryOfDictionaries[key.RawName][steamId] += incrementAmount;
     }
     
     /// <summary>
