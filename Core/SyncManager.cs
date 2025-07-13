@@ -105,7 +105,9 @@ public static class SyncManager
         #endif
         
         // Sync the upgrade to all clients
-        SyncHostToAll(bundle);
+        // Dont do this because it doesnt work. Maybe register something with REPOLib?
+        // TODO: Register upgrade sync with REPOLib
+        // SyncHostToAll(bundle);
     }
     
     /// <summary>
@@ -142,8 +144,7 @@ public static class SyncManager
         #endif
 
         bool[] results = players.Select(player => SyncHostToTarget(bundle, player)).ToArray();
-        if (results.Any())
-            SyncUtil.SyncStatsDictionaryToAll(bundle);
+        if (results.Any()) SyncUtil.SyncStatsDictionaryToAll(bundle);
     }
 
     /// <summary>

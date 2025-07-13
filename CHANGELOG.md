@@ -1,3 +1,6 @@
+# 2.2.6
+- Fixed small bug
+
 # 2.2.4
 - Removed RPC and reduced network operations
 
