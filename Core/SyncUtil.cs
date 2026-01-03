@@ -17,18 +17,20 @@ public static class SyncUtil
     private const string PlayerUpgrade = "playerUpgrade";
     private const string AppliedPlayerUpgrade = "appliedPlayerUpgrade";
     
-    public static readonly UpgradeId HealthId         = new(UpgradeType.Health);
-    public static readonly UpgradeId StaminaId        = new(UpgradeType.Stamina);
-    public static readonly UpgradeId ExtraJumpId      = new(UpgradeType.ExtraJump);
-    public static readonly UpgradeId TumbleLaunchId   = new(UpgradeType.TumbleLaunch);
-    public static readonly UpgradeId MapPlayerCountId = new(UpgradeType.MapPlayerCount);
-    public static readonly UpgradeId SprintSpeedId    = new(UpgradeType.SprintSpeed);
-    public static readonly UpgradeId GrabStrengthId   = new(UpgradeType.GrabStrength);
-    public static readonly UpgradeId GrabRangeId      = new(UpgradeType.GrabRange);
-    public static readonly UpgradeId ThrowStrengthId  = new(UpgradeType.ThrowStrength);
-    public static readonly UpgradeId TumbleWingsId    = new(UpgradeType.TumbleWings);
-    public static readonly UpgradeId CrouchRestId     = new(UpgradeType.CrouchRest);
-    
+    public static readonly UpgradeId HealthId          = new(UpgradeType.Health);
+    public static readonly UpgradeId StaminaId         = new(UpgradeType.Stamina);
+    public static readonly UpgradeId ExtraJumpId       = new(UpgradeType.ExtraJump);
+    public static readonly UpgradeId TumbleLaunchId    = new(UpgradeType.TumbleLaunch);
+    public static readonly UpgradeId MapPlayerCountId  = new(UpgradeType.MapPlayerCount);
+    public static readonly UpgradeId SprintSpeedId     = new(UpgradeType.SprintSpeed);
+    public static readonly UpgradeId GrabStrengthId    = new(UpgradeType.GrabStrength);
+    public static readonly UpgradeId GrabRangeId       = new(UpgradeType.GrabRange);
+    public static readonly UpgradeId ThrowStrengthId   = new(UpgradeType.ThrowStrength);
+    public static readonly UpgradeId TumbleClimbId     = new(UpgradeType.TumbleClimb);
+    public static readonly UpgradeId TumbleWingsId     = new(UpgradeType.TumbleWings);
+    public static readonly UpgradeId CrouchRestId      = new(UpgradeType.CrouchRest);
+    public static readonly UpgradeId DeathHeadBatteryId = new(UpgradeType.DeathHeadBattery);
+
     private static readonly ConcurrentQueue<ISyncRequest> SyncQueue = [];
     
     /// <summary>
@@ -99,8 +101,10 @@ public static class SyncUtil
         "Strength" => UpgradeType.GrabStrength,
         "Range" => UpgradeType.GrabRange,
         "Throw" => UpgradeType.ThrowStrength,
+        "Climb" => UpgradeType.TumbleClimb,
         "TumbleWings" => UpgradeType.TumbleWings,
         "CrouchRest" => UpgradeType.CrouchRest,
+        "DeathHead" => UpgradeType.DeathHeadBattery,
         // Assume
         _ => UpgradeType.Modded
     };
@@ -122,8 +126,10 @@ public static class SyncUtil
         UpgradeType.GrabStrength => "Strength",
         UpgradeType.GrabRange => "Range",
         UpgradeType.ThrowStrength => "Throw",
+        UpgradeType.TumbleClimb => "Climb",
         UpgradeType.TumbleWings => "TumbleWings",
         UpgradeType.CrouchRest => "CrouchRest",
+        UpgradeType.DeathHeadBattery => "DeathHead",
         UpgradeType.Modded => "Modded: Unknown",
         _ => throw new ArgumentException($"Invalid UpgradeType for {nameof(GetUpgradeName)}")
     };
@@ -146,8 +152,10 @@ public static class SyncUtil
         UpgradeType.GrabStrength => stats.playerUpgradeStrength,
         UpgradeType.GrabRange => stats.playerUpgradeRange,
         UpgradeType.ThrowStrength => stats.playerUpgradeThrow,
+        UpgradeType.TumbleClimb => stats.playerUpgradeTumbleClimb,
         UpgradeType.TumbleWings => stats.playerUpgradeTumbleWings,
         UpgradeType.CrouchRest => stats.playerUpgradeCrouchRest,
+        UpgradeType.DeathHeadBattery => stats.playerUpgradeDeathHeadBattery,
         UpgradeType.Modded => stats.dictionaryOfDictionaries[id.RawName],
         _ => throw new ArgumentException($"Invalid UpgradeType for {nameof(GetUpgrades)}")
     };
@@ -229,7 +237,9 @@ public static class SyncUtil
         UpgradeType.GrabRange => bundle.Manager.UpgradePlayerGrabRange(steamId),
         UpgradeType.ThrowStrength => bundle.Manager.UpgradePlayerThrowStrength(steamId),
         UpgradeType.TumbleWings => bundle.Manager.UpgradePlayerTumbleWings(steamId),
+        UpgradeType.TumbleClimb => bundle.Manager.UpgradePlayerTumbleClimb(steamId),
         UpgradeType.CrouchRest => bundle.Manager.UpgradePlayerCrouchRest(steamId),
+        UpgradeType.DeathHeadBattery => bundle.Manager.UpgradePlayerDeathHeadBattery(steamId),
         UpgradeType.Modded => UpgradeModded(bundle, SemiFunc.PlayerAvatarGetFromSteamID(steamId), key, 1),
         _ => throw new ArgumentException($"Invalid UpgradeType for {nameof(CallUpdateFunction)}")
     };

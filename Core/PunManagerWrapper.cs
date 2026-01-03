@@ -31,7 +31,10 @@ public class PunManagerWrapper(PunManager manager)
     
     public int UpgradePlayerTumbleLaunch(string steamId)
         => manager.UpgradePlayerTumbleLaunch(steamId);
-    
+
+    public int UpgradePlayerTumbleClimb(string steamId)
+        => manager.UpgradePlayerTumbleClimb(steamId);
+
     public int UpgradeMapPlayerCount(string steamId)
         => manager.UpgradeMapPlayerCount(steamId);
     
@@ -46,4 +49,7 @@ public class PunManagerWrapper(PunManager manager)
     
     public int UpgradePlayerThrowStrength(string steamId)
         => manager.UpgradePlayerThrowStrength(steamId);
+
+    public int UpgradePlayerDeathHeadBattery(string steamId)
+        => manager.UpgradeDeathHeadBattery(steamId);
 }
