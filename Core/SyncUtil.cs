@@ -17,18 +17,18 @@ public static class SyncUtil
     private const string PlayerUpgrade = "playerUpgrade";
     private const string AppliedPlayerUpgrade = "appliedPlayerUpgrade";
     
-    public static readonly UpgradeId HealthId          = new(UpgradeType.Health);
-    public static readonly UpgradeId StaminaId         = new(UpgradeType.Stamina);
-    public static readonly UpgradeId ExtraJumpId       = new(UpgradeType.ExtraJump);
-    public static readonly UpgradeId TumbleLaunchId    = new(UpgradeType.TumbleLaunch);
-    public static readonly UpgradeId MapPlayerCountId  = new(UpgradeType.MapPlayerCount);
-    public static readonly UpgradeId SprintSpeedId     = new(UpgradeType.SprintSpeed);
-    public static readonly UpgradeId GrabStrengthId    = new(UpgradeType.GrabStrength);
-    public static readonly UpgradeId GrabRangeId       = new(UpgradeType.GrabRange);
-    public static readonly UpgradeId ThrowStrengthId   = new(UpgradeType.ThrowStrength);
-    public static readonly UpgradeId TumbleClimbId     = new(UpgradeType.TumbleClimb);
-    public static readonly UpgradeId TumbleWingsId     = new(UpgradeType.TumbleWings);
-    public static readonly UpgradeId CrouchRestId      = new(UpgradeType.CrouchRest);
+    public static readonly UpgradeId HealthId           = new(UpgradeType.Health);
+    public static readonly UpgradeId StaminaId          = new(UpgradeType.Stamina);
+    public static readonly UpgradeId ExtraJumpId        = new(UpgradeType.ExtraJump);
+    public static readonly UpgradeId TumbleLaunchId     = new(UpgradeType.TumbleLaunch);
+    public static readonly UpgradeId MapPlayerCountId   = new(UpgradeType.MapPlayerCount);
+    public static readonly UpgradeId SprintSpeedId      = new(UpgradeType.SprintSpeed);
+    public static readonly UpgradeId GrabStrengthId     = new(UpgradeType.GrabStrength);
+    public static readonly UpgradeId GrabRangeId        = new(UpgradeType.GrabRange);
+    public static readonly UpgradeId ThrowStrengthId    = new(UpgradeType.ThrowStrength);
+    public static readonly UpgradeId TumbleClimbId      = new(UpgradeType.TumbleClimb);
+    public static readonly UpgradeId TumbleWingsId      = new(UpgradeType.TumbleWings);
+    public static readonly UpgradeId CrouchRestId       = new(UpgradeType.CrouchRest);
     public static readonly UpgradeId DeathHeadBatteryId = new(UpgradeType.DeathHeadBattery);
 
     private static readonly ConcurrentQueue<ISyncRequest> SyncQueue = [];
