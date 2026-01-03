@@ -9,11 +9,11 @@ using UnityEngine;
 namespace SyncUpgrades;
 
 [BepInPlugin(PluginId, PluginName, PluginVersion)]
-[BepInDependency("REPOLib", "2.1.0")]
+[BepInDependency("REPOLib", "3.0.3")]
 public class Entry : BaseUnityPlugin
 {
     private const string PluginName = "Sync Upgrades";
-    private const string PluginVersion = "2.2.6";
+    private const string PluginVersion = "3.0.0";
     private const string PluginId = "TGO.SyncUpgrades";
 
     private static readonly Harmony Harmony = new(PluginId);

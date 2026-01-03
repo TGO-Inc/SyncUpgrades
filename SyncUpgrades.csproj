@@ -7,361 +7,374 @@
         <IncludeCopyLocalFilesOutputGroup>false</IncludeCopyLocalFilesOutputGroup>
         <Configurations>Debug;Release;</Configurations>
         <Platforms>AnyCPU</Platforms>
-        <Version>2.2.6</Version>
+        <Version>3.0.0</Version>
+		<EnableGameReferences>true</EnableGameReferences>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <RestoreAdditionalProjectSources>
+      https://api.nuget.org/v3/index.json;
+      https://nuget.bepinex.dev/v3/index.json;
+      https://nuget.windows10ce.com/nuget/v3/index.json
+    </RestoreAdditionalProjectSources>
   </PropertyGroup>
 
   <ItemGroup>
       <Reference Include="Assembly-CSharp">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\Assembly-CSharp.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\Assembly-CSharp.dll</HintPath>
       <Private>false</Private></Reference>
+      <Reference Include="Assembly-CSharp-firstpass">
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\Assembly-CSharp-firstpass.dll</HintPath>
+      </Reference>
       <Reference Include="Autodesk.Fbx">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\Autodesk.Fbx.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\Autodesk.Fbx.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="Facepunch.Steamworks.Win64">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\Facepunch.Steamworks.Win64.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\Facepunch.Steamworks.Win64.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="FbxBuildTestAssets">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\FbxBuildTestAssets.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\FbxBuildTestAssets.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="mscorlib">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\mscorlib.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\mscorlib.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="Newtonsoft.Json">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\Newtonsoft.Json.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\Newtonsoft.Json.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="Photon3Unity3D">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\Photon3Unity3D.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\Photon3Unity3D.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="PhotonChat">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\PhotonChat.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\PhotonChat.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="PhotonRealtime">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\PhotonRealtime.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\PhotonRealtime.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="PhotonUnityNetworking">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\PhotonUnityNetworking.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\PhotonUnityNetworking.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="PhotonUnityNetworking.Utilities">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\PhotonUnityNetworking.Utilities.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\PhotonUnityNetworking.Utilities.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="PhotonVoice">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\PhotonVoice.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\PhotonVoice.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="PhotonVoice.API">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\PhotonVoice.API.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\PhotonVoice.API.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="PhotonVoice.PUN">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\PhotonVoice.PUN.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\PhotonVoice.PUN.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="REPOLib">
-        <HintPath>..\..\..\.config\r2modmanPlus-local\REPO\profiles\Default\BepInEx\plugins\Zehs-REPOLib\REPOLib.dll</HintPath>
+        <HintPath>..\..\..\AppData\Roaming\r2modmanPlus-local\REPO\profiles\Dev\BepInEx\plugins\Zehs-REPOLib\REPOLib.dll</HintPath>
       </Reference>
       <Reference Include="Sirenix.OdinInspector.Attributes">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\Sirenix.OdinInspector.Attributes.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\Sirenix.OdinInspector.Attributes.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="Sirenix.Serialization">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\Sirenix.Serialization.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\Sirenix.Serialization.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="Sirenix.Serialization.Config">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\Sirenix.Serialization.Config.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\Sirenix.Serialization.Config.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="Sirenix.Utilities">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\Sirenix.Utilities.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\Sirenix.Utilities.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="System">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\System.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\System.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="System.ComponentModel.Composition">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\System.ComponentModel.Composition.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\System.ComponentModel.Composition.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="System.Core">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\System.Core.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\System.Core.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="System.Data">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\System.Data.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\System.Data.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="System.Drawing">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\System.Drawing.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\System.Drawing.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="System.IO.Compression">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\System.IO.Compression.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\System.IO.Compression.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="System.IO.Compression.FileSystem">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\System.IO.Compression.FileSystem.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\System.IO.Compression.FileSystem.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="System.Net.Http">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\System.Net.Http.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\System.Net.Http.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="System.Numerics">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\System.Numerics.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\System.Numerics.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="System.Runtime.Serialization">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\System.Runtime.Serialization.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\System.Runtime.Serialization.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="System.Transactions">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\System.Transactions.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\System.Transactions.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="System.Xml">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\System.Xml.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\System.Xml.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="System.Xml.Linq">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\System.Xml.Linq.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\System.Xml.Linq.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="Unity.AI.Navigation">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\Unity.AI.Navigation.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\Unity.AI.Navigation.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="Unity.Formats.Fbx.Runtime">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\Unity.Formats.Fbx.Runtime.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\Unity.Formats.Fbx.Runtime.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="Unity.InputSystem">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\Unity.InputSystem.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\Unity.InputSystem.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="Unity.InputSystem.ForUI">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\Unity.InputSystem.ForUI.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\Unity.InputSystem.ForUI.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="Unity.Postprocessing.Runtime">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\Unity.Postprocessing.Runtime.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\Unity.Postprocessing.Runtime.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="Unity.RenderPipelines.Core.Runtime">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="Unity.TextMeshPro">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\Unity.TextMeshPro.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\Unity.TextMeshPro.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="Unity.Timeline">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\Unity.Timeline.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\Unity.Timeline.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="Unity.VisualScripting.Core">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\Unity.VisualScripting.Core.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\Unity.VisualScripting.Core.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="Unity.VisualScripting.Flow">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\Unity.VisualScripting.Flow.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\Unity.VisualScripting.Flow.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="Unity.VisualScripting.State">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\Unity.VisualScripting.State.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\Unity.VisualScripting.State.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.AccessibilityModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.AccessibilityModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.AccessibilityModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.AIModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.AIModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.AIModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.AndroidJNIModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.AndroidJNIModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.AndroidJNIModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.AnimationModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.AnimationModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.AnimationModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.ARModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.ARModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.ARModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.AssetBundleModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.AssetBundleModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.AssetBundleModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.AudioModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.AudioModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.AudioModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.ClothModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.ClothModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.ClothModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.ClusterInputModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.ClusterInputModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.ClusterInputModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.ClusterRendererModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.ClusterRendererModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.ClusterRendererModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.ContentLoadModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.ContentLoadModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.ContentLoadModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.CoreModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.CrashReportingModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.CrashReportingModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.CrashReportingModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.DirectorModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.DirectorModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.DirectorModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.DSPGraphModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.DSPGraphModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.DSPGraphModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.GameCenterModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.GameCenterModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.GameCenterModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.GIModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.GIModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.GIModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.GridModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.GridModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.GridModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.HotReloadModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.HotReloadModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.HotReloadModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.ImageConversionModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.ImageConversionModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.ImageConversionModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.IMGUIModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.InputLegacyModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.InputLegacyModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.InputLegacyModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.InputModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.InputModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.InputModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.JSONSerializeModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.JSONSerializeModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.JSONSerializeModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.LocalizationModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.LocalizationModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.LocalizationModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.NVIDIAModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.NVIDIAModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.NVIDIAModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.ParticleSystemModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.ParticleSystemModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.ParticleSystemModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.PerformanceReportingModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.PerformanceReportingModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.PerformanceReportingModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.Physics2DModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.Physics2DModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.Physics2DModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.PhysicsModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.PhysicsModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.PhysicsModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.ProfilerModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.ProfilerModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.ProfilerModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.PropertiesModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.PropertiesModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.PropertiesModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.ScreenCaptureModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.ScreenCaptureModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.ScreenCaptureModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.SharedInternalsModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.SharedInternalsModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.SharedInternalsModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.SpriteMaskModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.SpriteMaskModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.SpriteMaskModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.SpriteShapeModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.SpriteShapeModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.SpriteShapeModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.StreamingModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.StreamingModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.StreamingModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.SubstanceModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.SubstanceModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.SubstanceModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.SubsystemsModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.SubsystemsModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.SubsystemsModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.TerrainModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.TerrainModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.TerrainModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.TerrainPhysicsModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.TerrainPhysicsModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.TerrainPhysicsModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.TextCoreFontEngineModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.TextCoreFontEngineModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.TextCoreFontEngineModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.TextCoreTextEngineModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.TextCoreTextEngineModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.TextCoreTextEngineModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.TextRenderingModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.TilemapModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.TilemapModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.TilemapModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.TLSModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.TLSModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.TLSModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.UI">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.UI.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.UI.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.UIElementsModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.UIElementsModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.UIElementsModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.UIModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.UIModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.UIModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.UmbraModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.UmbraModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.UmbraModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.UnityAnalyticsCommonModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.UnityAnalyticsCommonModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.UnityAnalyticsCommonModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.UnityAnalyticsModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.UnityAnalyticsModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.UnityAnalyticsModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.UnityConnectModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.UnityConnectModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.UnityConnectModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.UnityCurlModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.UnityCurlModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.UnityCurlModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.UnityTestProtocolModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.UnityTestProtocolModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.UnityTestProtocolModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.UnityWebRequestAssetBundleModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.UnityWebRequestAssetBundleModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.UnityWebRequestAssetBundleModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.UnityWebRequestAudioModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.UnityWebRequestAudioModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.UnityWebRequestAudioModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.UnityWebRequestModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.UnityWebRequestModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.UnityWebRequestModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.UnityWebRequestTextureModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.UnityWebRequestTextureModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.UnityWebRequestTextureModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.UnityWebRequestWWWModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.VehiclesModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.VehiclesModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.VehiclesModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.VFXModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.VFXModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.VFXModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.VideoModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.VideoModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.VideoModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.VirtualTexturingModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.VirtualTexturingModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.VirtualTexturingModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.VRModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.VRModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.VRModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.WindModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.WindModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.WindModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="UnityEngine.XRModule">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.XRModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\UnityEngine.XRModule.dll</HintPath>
       <Private>false</Private></Reference>
       <Reference Include="websocket-sharp">
-        <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\websocket-sharp.dll</HintPath>
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\REPO\REPO_Data\Managed\websocket-sharp.dll</HintPath>
       <Private>false</Private></Reference>
   </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="BepInEx.Core" Version="5.4.21"/>
+        <PackageReference Include="BepInEx.Core" Version="5.4.21" />
+		<PackageReference Include="Linkoid.Repo.Plugin.Build" Version="*" PrivateAssets="all" />
     </ItemGroup>
 </Project>
