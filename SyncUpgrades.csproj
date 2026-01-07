@@ -10,14 +10,6 @@
         <Version>3.0.0</Version>
   </PropertyGroup>
 
-  <PropertyGroup>
-    <RestoreAdditionalProjectSources>
-      https://api.nuget.org/v3/index.json;
-      https://nuget.bepinex.dev/v3/index.json;
-      https://nuget.windows10ce.com/nuget/v3/index.json
-    </RestoreAdditionalProjectSources>
-  </PropertyGroup>
-
   <ItemGroup>
       <Reference Include="Assembly-CSharp">
         <HintPath>..\..\..\..\..\mnt\2TB_NVME\SteamLibrary\steamapps\common\REPO\REPO_Data\Managed\Assembly-CSharp.dll</HintPath>
@@ -371,6 +363,5 @@
 
     <ItemGroup>
         <PackageReference Include="BepInEx.Core" Version="5.4.21" />
-		<PackageReference Include="Linkoid.Repo.Plugin.Build" Version="*" PrivateAssets="all" />
     </ItemGroup>
 </Project>
