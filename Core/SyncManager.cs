@@ -12,17 +12,19 @@ public static class SyncManager
 {
     private const string Section = "Default Upgrades";
     private const string ModdedSection = "Modded Upgrades";
-    private static ConfigEntry<bool> _syncHealth         = Entry.BepConfig.Bind(Section, "Health", true, "Sync Max Health");
-    private static ConfigEntry<bool> _syncStamina        = Entry.BepConfig.Bind(Section, "Stamina", true, "Sync Max Stamina");
-    private static ConfigEntry<bool> _syncExtraJump      = Entry.BepConfig.Bind(Section, "Extra Jump", true, "Sync Extra Jump");
-    private static ConfigEntry<bool> _syncMapPlayerCount = Entry.BepConfig.Bind(Section, "Map Player Count", true, "Sync Map Player Count");
-    private static ConfigEntry<bool> _syncGrabRange      = Entry.BepConfig.Bind(Section, "Grab Range", true, "Sync Grab Range");
-    private static ConfigEntry<bool> _syncGrabStrength   = Entry.BepConfig.Bind(Section, "Grab Strength", true, "Sync Grab Strength");
-    private static ConfigEntry<bool> _syncThrowStrength  = Entry.BepConfig.Bind(Section, "Throw Strength", true, "Sync Throw Strength");
-    private static ConfigEntry<bool> _syncSprintSpeed    = Entry.BepConfig.Bind(Section, "Sprint Speed", true, "Sync Sprint Speed");
-    private static ConfigEntry<bool> _syncTumbleLaunch   = Entry.BepConfig.Bind(Section, "Tumble Launch", true, "Sync Tumble Launch");
-    private static ConfigEntry<bool> _syncTumbleWings    = Entry.BepConfig.Bind(Section, "Tumble Wings", true, "Sync Tumble Wings");
-    private static ConfigEntry<bool> _syncCrouchRest     = Entry.BepConfig.Bind(Section, "Crouch Rest", true, "Sync Crouch Rest");
+    private static ConfigEntry<bool> _syncHealth           = Entry.BepConfig.Bind(Section, "Health", true, "Sync Max Health");
+    private static ConfigEntry<bool> _syncStamina          = Entry.BepConfig.Bind(Section, "Stamina", true, "Sync Max Stamina");
+    private static ConfigEntry<bool> _syncExtraJump        = Entry.BepConfig.Bind(Section, "Extra Jump", true, "Sync Extra Jump");
+    private static ConfigEntry<bool> _syncMapPlayerCount   = Entry.BepConfig.Bind(Section, "Map Player Count", true, "Sync Map Player Count");
+    private static ConfigEntry<bool> _syncGrabRange        = Entry.BepConfig.Bind(Section, "Grab Range", true, "Sync Grab Range");
+    private static ConfigEntry<bool> _syncGrabStrength     = Entry.BepConfig.Bind(Section, "Grab Strength", true, "Sync Grab Strength");
+    private static ConfigEntry<bool> _syncThrowStrength    = Entry.BepConfig.Bind(Section, "Throw Strength", true, "Sync Throw Strength");
+    private static ConfigEntry<bool> _syncSprintSpeed      = Entry.BepConfig.Bind(Section, "Sprint Speed", true, "Sync Sprint Speed");
+    private static ConfigEntry<bool> _syncTumbleLaunch     = Entry.BepConfig.Bind(Section, "Tumble Launch", true, "Sync Tumble Launch");
+    private static ConfigEntry<bool> _syncTumbleWings      = Entry.BepConfig.Bind(Section, "Tumble Wings", true, "Sync Tumble Wings");
+    private static ConfigEntry<bool> _syncTumbleClimb      = Entry.BepConfig.Bind(Section, "Tumble Climb", true, "Sync Tumble Climb");
+    private static ConfigEntry<bool> _syncCrouchRest       = Entry.BepConfig.Bind(Section, "Crouch Rest", true, "Sync Crouch Rest");
+    private static ConfigEntry<bool> _syncDeathHeadBattery = Entry.BepConfig.Bind(Section, "Death Head Battery", true, "Sync Dead Head Battery");
     internal static ConcurrentDictionary<UpgradeId, ConfigEntry<bool>> registeredModdedUpgrades = [];
 
     internal static void Init()
@@ -234,7 +236,9 @@ public static class SyncManager
         UpgradeType.GrabRange => _syncGrabRange.Value,
         UpgradeType.ThrowStrength => _syncThrowStrength.Value,
         UpgradeType.TumbleWings => _syncTumbleWings.Value,
+        UpgradeType.TumbleClimb => _syncTumbleClimb.Value,
         UpgradeType.CrouchRest => _syncCrouchRest.Value,
+        UpgradeType.DeathHeadBattery => _syncDeathHeadBattery.Value,
         UpgradeType.Modded => registeredModdedUpgrades.TryGetValue(key, out ConfigEntry<bool> value) && value.Value,
         var _ => false
     };

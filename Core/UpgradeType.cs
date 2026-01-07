@@ -13,6 +13,7 @@ public enum UpgradeType
     Stamina,
     ExtraJump,
     TumbleLaunch,
+    TumbleClimb,
     MapPlayerCount,
     SprintSpeed,
     GrabStrength,
@@ -20,4 +21,5 @@ public enum UpgradeType
     ThrowStrength,
     TumbleWings,
     CrouchRest,
+    DeathHeadBattery,
 }

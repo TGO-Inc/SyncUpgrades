@@ -1,3 +1,8 @@
+# 3.0.0
+- Fix support for R.E.P.O. v0.3.x
+  - Add support for `DeathHeadBattery` and `TumbleClimb` upgrades
+- Updated REPOLib minimum version to 3.0.3
+
 # 2.2.6
 - Fixed small bug
 
